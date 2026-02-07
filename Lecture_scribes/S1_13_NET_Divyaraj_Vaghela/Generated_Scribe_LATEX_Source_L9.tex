@@ -1,0 +1,249 @@
+
+\documentclass[12pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+\onehalfspacing
+
+\begin{document}
+
+\begin{center}
+\textbf{Lecture Scribe: CSE400 – Fundamentals of Probability in Computing}\\
+\textbf{Lecture 9: Uniform, Exponential, Laplace, and Gamma Random Variables}\\
+(Prepared strictly from lecture slides content)
+\end{center}
+
+\vspace{0.5cm}
+
+\noindent\textbf{Name:} Divyaraj Vaghela\\
+\textbf{Enrollment Number: AU2440251}
+
+\section{Introduction}
+
+This lecture discusses types of continuous random variables, focusing on:
+\begin{itemize}
+    \item Uniform Random Variable
+    \item Exponential Random Variable
+    \item Laplace Random Variable
+    \item Gamma Random Variable
+\end{itemize}
+
+The lecture includes definitions, probability density functions (PDFs), cumulative distribution functions (CDFs), graphical interpretations, applications, and worked examples.
+
+\section{Uniform Random Variable}
+
+\subsection{Definition}
+
+A continuous random variable $X$ is said to be uniformly distributed over the interval $[a,b]$ if its probability density function (PDF) is given by:
+
+\[
+f_X(x)=
+\begin{cases}
+\dfrac{1}{b-a}, & a \le x < b \\
+0, & \text{elsewhere}
+\end{cases}
+\]
+
+\subsection{Cumulative Distribution Function (CDF)}
+
+The cumulative distribution function corresponding to the uniform distribution is:
+
+\[
+F_X(x)=
+\begin{cases}
+0, & x < a \\
+\dfrac{x-a}{b-a}, & a \le x < b \\
+1, & x \ge b
+\end{cases}
+\]
+
+\subsection{Graphical Representation}
+
+The PDF of a uniform random variable is constant over the interval $[a,b]$. The CDF increases linearly from $0$ to $1$ over the interval.
+
+\section{Example 1: Uniform Random Variable}
+
+\subsection{Problem Statement}
+
+The phase of a sinusoid $\Theta$ is uniformly distributed over the interval $[0,2\pi]$. The PDF is given by:
+
+\[
+f_\Theta(\theta)=
+\begin{cases}
+\dfrac{1}{2\pi}, & 0 \le \theta < 2\pi \\
+0, & \text{otherwise}
+\end{cases}
+\]
+
+\subsection{Part (a): $\Pr(\Theta > 3\pi/4)$}
+
+For a uniform random variable over $[0,2\pi]$:
+
+\[
+\Pr(a < \Theta < b)=\frac{b-a}{2\pi}
+\]
+
+Thus,
+
+\[
+\Pr(\Theta > 3\pi/4)=\frac{2\pi-3\pi/4}{2\pi}=\frac{5}{8}
+\]
+
+\subsection{Part (b): $\Pr(\Theta < \pi\mid \Theta > 3\pi/4)$}
+
+Using conditional probability:
+
+\[
+\Pr(A\mid B)=\frac{\Pr(A \cap B)}{\Pr(B)}
+\]
+
+Let $A=\{\Theta<\pi\}$ and $B=\{\Theta>3\pi/4\}$.
+
+\[
+\Pr(3\pi/4<\Theta<\pi)=\frac{\pi-3\pi/4}{2\pi}=\frac{1}{8}
+\]
+
+Since $\Pr(B)=\frac{5}{8}$,
+
+\[
+\Pr(\Theta<\pi\mid\Theta>3\pi/4)=\frac{1/8}{5/8}=\frac{1}{5}
+\]
+
+\subsection{Part (c): $\Pr(\cos\Theta<1/2)$}
+
+The values of $\Theta$ satisfying $\cos\Theta=1/2$ are:
+
+\[
+\Theta=\frac{\pi}{3},\; \frac{5\pi}{3}
+\]
+
+Thus,
+
+\[
+\cos\Theta<\frac{1}{2} \quad \text{for} \quad \frac{\pi}{3}<\Theta<\frac{5\pi}{3}
+\]
+
+Therefore,
+
+\[
+\Pr(\cos\Theta<1/2)=\frac{5\pi/3-\pi/3}{2\pi}=\frac{2}{3}
+\]
+
+\section{Applications of Uniform Random Variable}
+
+\begin{itemize}
+    \item Phase of a sinusoidal signal when angles between $0$ and $2\pi$ are equally likely
+    \item Random number generation between $0$ and $1$ for simulations
+    \item Arrival time of a user within a known time window assuming no preference
+\end{itemize}
+
+\section{Exponential Random Variable}
+
+\subsection{Definition}
+
+The exponential random variable has PDF and CDF defined for any $b>0$.
+
+\subsection{Probability Density Function}
+
+\[
+f_X(x)=\frac{1}{b}e^{-x/b}u(x)
+\]
+
+where $u(x)$ denotes the unit step function.
+
+\subsection{Cumulative Distribution Function}
+
+\[
+F_X(x)=[1-e^{-x/b}]u(x)
+\]
+
+\subsection{Graphical Interpretation}
+
+The PDF decreases exponentially as $x$ increases. The CDF increases monotonically and approaches $1$ asymptotically.
+
+\section{Example 2: Exponential Random Variable}
+
+\subsection{Problem Statement}
+
+Let $X$ be an exponential random variable with PDF:
+
+\[
+f_X(x)=e^{-x}u(x)
+\]
+
+\subsection{Part (a): $\Pr(3X<5)$}
+
+Since $3X<5 \Rightarrow X<5/3$,
+
+\[
+\Pr(3X<5)=\Pr(X<5/3)=1-e^{-5/3}
+\]
+
+\subsection{Part (b): Generalization}
+
+For arbitrary constant $y$:
+
+\[
+\Pr(3X<y)=\Pr(X<y/3)=1-e^{-y/3}
+\]
+
+\section{Remaining Topics in Lecture Outline}
+
+The lecture outline lists the following additional topics:
+\begin{itemize}
+    \item Laplace Random Variable
+    \item Gamma Random Variable
+    \item Graph and Special Cases
+    \item Example
+    \item Homework Problem
+    \item Problem Solving and In-class Activity
+\end{itemize}
+
+Detailed derivations of these topics are not provided within the given slides.
+
+\section{Logical Progression of Concepts}
+
+\begin{enumerate}
+    \item Introduction to uniform distribution and its properties
+    \item Application-based problem solving using uniform distribution
+    \item Introduction to exponential distribution
+    \item Application-based problems using exponential distribution
+    \item Preview of additional continuous distributions
+\end{enumerate}
+
+\section{Summary of Key Mathematical Results}
+
+\subsection*{Uniform Random Variable}
+
+\[
+f_X(x)=
+\begin{cases}
+\dfrac{1}{b-a}, & a \le x < b \\
+0, & \text{otherwise}
+\end{cases}
+\]
+
+\[
+F_X(x)=
+\begin{cases}
+0, & x < a \\
+\dfrac{x-a}{b-a}, & a \le x < b \\
+1, & x \ge b
+\end{cases}
+\]
+
+\subsection*{Exponential Random Variable}
+
+\[
+f_X(x)=\frac{1}{b}e^{-x/b}u(x)
+\]
+
+\[
+F_X(x)=[1-e^{-x/b}]u(x)
+\]
+
+\end{document}
+

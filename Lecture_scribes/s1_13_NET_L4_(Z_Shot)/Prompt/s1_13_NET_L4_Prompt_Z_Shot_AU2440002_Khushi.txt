@@ -1,0 +1,6 @@
+You have to generate a Lecture scribe which must be comprehensive and should be strictly based on the material which I will provide and it is supposed to serve as a reference for exam preparation.
+follow the instructions i will provide below:
+1. Source: Only the use of provided material is accepted, do not introduce external information, example or personal touch of intuition. 
+2. Content of the scribe: It should have all definitions and mathematical notations exactly like the material provided. There should be formal statements of all theorems, lemmas and answers. Proofs and derivations should be step by step and should ensure logical progression clearly. All the worked out examples with all the steps and calculations with context should be there. 
+3. Structure: It should follow the same logical and organized structure as the lecture material provided. It should not be very conversational rather it should follow a technical approach. Use clear headings and subheadings. 
+4. Not to do: it is not a tutorial or a summary, no simplification. It should not be intuitive or real world analogy dependent. Do not hallucinate content just to fill gaps.

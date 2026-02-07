@@ -1,0 +1,307 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{setspace}
+\geometry{a4paper, margin=1in}
+\setstretch{1.2}
+
+\begin{document}
+
+\section*{Lecture Scribe — CSE400}
+
+\textbf{Lecture 4: Joint Probability and Conditional Probability}\\
+\textbf{Instructor:} Dhaval Patel, PhD\\
+\textbf{Date:} January 15, 2026
+
+\hrule
+\vspace{1em}
+
+\section*{1. Introduction to Probability Theory}
+
+\subsection*{1.1 Experiments, Sample Space, and Events}
+
+\textbf{Definitions}
+
+\begin{itemize}
+    \item \textbf{Experiment (E):} A procedure we perform that produces some result.\\
+    \textit{Example:} Tossing a coin five times.
+
+    \item \textbf{Outcome ($\omega$):} A possible result of an experiment.\\
+    \textit{Example:} One outcome of five coin tosses: \texttt{HHTHT}.
+
+    \item \textbf{Event (A, B, C, …):} A set of outcomes of an experiment.\\
+    \textit{Example:} Event ( C ): all outcomes consisting of an even number of heads.
+
+    \item \textbf{Sample Space (S):} The set of all possible distinct outcomes of an experiment.
+\end{itemize}
+
+Outcomes in ( S ) are:
+\begin{itemize}
+    \item \textbf{Mutually Exclusive:} Only one can occur at a time.
+    \item \textbf{Collectively Exhaustive:} No other outcome is possible.
+\end{itemize}
+
+Sample space can be:
+\begin{itemize}
+    \item Discrete
+    \item Countably infinite
+    \item Continuous
+\end{itemize}
+
+\textbf{Examples}
+\begin{itemize}
+    \item Flipping a fair coin once
+    \item Rolling a cubical die
+    \item Rolling two dice
+    \item Flipping a coin until tails occurs
+    \item Random number generator on ([0,1))
+\end{itemize}
+
+\section*{2. Axioms of Probability}
+
+Probability is a function that assigns a numerical measure to events.
+
+\textbf{Axioms}
+
+\begin{enumerate}
+    \item For any event ( A ):
+    \[
+    0 \leq Pr(A) \leq 1
+    \]
+
+    \item If ( S ) is the sample space:
+    \[
+    Pr(S) = 1
+    \]
+
+    \item If ( A \cap B = \varnothing ):
+    \[
+    Pr(A \cup B) = Pr(A) + Pr(B)
+    \]
+\end{enumerate}
+
+For infinite mutually exclusive events ( $A_i$ ):
+\[
+Pr\left(\bigcup_{i=1}^{\infty} A_i \right) = \sum_{i=1}^{\infty} Pr(A_i)
+\]
+
+\section*{3. Corollary from Axioms}
+
+\textbf{Corollary 2.1 (Finite case)}\\
+For a finite number of mutually exclusive events ( $A_i$ ):
+\[
+Pr\left(\bigcup_{i=1}^{n} A_i \right) = \sum_{i=1}^{n} Pr(A_i)
+\]
+
+\section*{4. Propositions from Axioms}
+
+\begin{itemize}
+    \item \textbf{Proposition 2.1}
+    \[
+    Pr(A^c) = 1 - Pr(A)
+    \]
+
+    \item \textbf{Proposition 2.2}\\
+    If ( A $\subset$ B ), then
+    \[
+    Pr(A) \leq Pr(B)
+    \]
+
+    \item \textbf{Proposition 2.3}
+    \[
+    Pr(A \cup B) = Pr(A) + Pr(B) - Pr(A \cap B)
+    \]
+
+    \item \textbf{Proposition 2.4 (Inclusion–Exclusion Principle)}\\
+    \[
+    Pr(A_1 \cup A_2 \cup \dots \cup A_n)
+    \]
+    expressed using alternating sums of intersections.
+\end{itemize}
+
+\section*{5. Assigning Probabilities}
+
+\subsection*{5.1 Classical Approach}
+
+\begin{itemize}
+    \item Coin flip: ( Pr(H) = Pr(T) )
+    \item Die roll: ( Pr(\text{even}) )
+    \item Two dice: ( Pr(\text{sum} = 5) )
+\end{itemize}
+
+\subsection*{5.2 Relative Frequency Approach}
+
+\[
+Pr(A) = \lim_{n \to \infty} \frac{\text{Number of times A occurs}}{n}
+\]
+
+Limitations:
+\begin{itemize}
+    \item Requires infinite repetitions
+    \item Many phenomena are not repeatable
+\end{itemize}
+
+\section*{6. Joint Probability}
+
+\subsection*{6.1 Motivation}
+
+Events are not always mutually exclusive. We are interested in:
+\[
+Pr(A \cap B)
+\]
+
+\subsection*{6.2 Notation}
+
+\[
+Pr(A, B) \quad \text{or} \quad Pr(A \cap B)
+\]
+
+For multiple events:
+\[
+Pr(A_1, A_2, \dots, A_n)
+\]
+
+\subsection*{6.3 Calculation Approaches}
+
+\begin{itemize}
+    \item \textbf{Classical:} Express events using atomic outcomes and find common outcomes.
+    \item \textbf{Relative Frequency:}
+    \[
+    Pr(A,B) = \frac{n_{A,B}}{n}
+    \]
+\end{itemize}
+
+\subsection*{Example 1: Card Deck Example}
+
+52 cards, 13 per suit.
+
+Let:
+\begin{itemize}
+    \item ( A ): Red card
+    \item ( B ): Number card (Ace included)
+    \item ( C ): Heart card
+\end{itemize}
+
+\textbf{Individual Probabilities}
+\[
+Pr(A) = \frac{26}{52} = \frac{1}{2}
+\]
+\[
+Pr(B) = \frac{40}{52} = \frac{5}{26}
+\]
+\[
+Pr(C) = \frac{13}{52} = \frac{1}{4}
+\]
+
+\textbf{Joint Probabilities}
+\[
+Pr(A,B) = \frac{20}{52}
+\]
+\[
+Pr(A,C) = \frac{13}{52}
+\]
+\[
+Pr(B,C) = \frac{10}{52}
+\]
+
+\subsection*{Example 2: Costume Party}
+
+Tops: 3 T-shirts, 1 cape → ( Pr(\text{Cape}) = $\frac{1}{4}$ )
+
+Bottoms: 2 pants, 4 boxers → ( Pr(\text{Boxers}) = $\frac{4}{6}$ )
+
+Joint probability:
+\[
+Pr(\text{Cape and Boxers}) = \frac{1}{4} \times \frac{4}{6} = \frac{1}{6}
+\]
+
+Correct option: C
+
+\section*{7. Conditional Probability}
+
+\subsection*{7.1 Motivation}
+
+Occurrence of one event may depend on another.
+
+\subsection*{7.2 Definition}
+
+\[
+Pr(A|B) = \frac{Pr(A,B)}{Pr(B)}, \quad Pr(B) > 0
+\]
+
+\subsection*{7.3 Product Rule}
+
+\[
+Pr(A,B) = Pr(A|B)Pr(B) = Pr(B|A)Pr(A)
+\]
+
+\subsection*{7.4 Three Events}
+
+\[
+Pr(A,B,C) = Pr(C|A,B)Pr(B|A)Pr(A)
+\]
+
+\subsection*{7.5 Chain Rule}
+
+\[
+Pr(A_1, A_2, \dots, A_n) =
+Pr(A_n | A_1,\dots,A_{n-1}) \dots Pr(A_2|A_1)Pr(A_1)
+\]
+
+\subsection*{Example 3: Cards Without Replacement}
+
+Two cards drawn, no replacement.
+
+\begin{itemize}
+    \item ( A ): First card is Spade
+    \item ( B ): Second card is Spade
+\end{itemize}
+
+After one spade removed:
+\begin{itemize}
+    \item Remaining cards = 51
+    \item Remaining spades = 12
+\end{itemize}
+
+\[
+Pr(B|A) = \frac{12}{51}
+\]
+
+\subsection*{Example 4: Game of Poker — Flush}
+
+\textbf{Flush in Spades}
+\[
+Pr = \frac{13}{52} \times \frac{12}{51} \times \frac{11}{50} \times \frac{10}{49} \times \frac{9}{48}
+\]
+
+\textbf{Any Flush}
+\[
+4 \times Pr(\text{Spade Flush})
+\]
+
+\subsection*{Example 5: The Missing Key}
+
+Given:
+\[
+P(L) = 0.4,\quad P(R) = 0.4,\quad P(K)=0.8
+\]
+
+Find:
+\[
+P(R | L^c)
+\]
+
+Since key cannot be in both pockets:
+\[
+P(R|L^c) = \frac{P(R)}{P(L^c)} = \frac{0.4}{0.6} = \frac{2}{3}
+\]
+
+Correct option: C
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\textbf{End of Lecture}
+
+\end{document}

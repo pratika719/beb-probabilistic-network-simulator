@@ -1,0 +1,13 @@
+Generate a lecture scribe intended to serve as exam reference material for a reading-based, closed-notes examination.
+
+Use only the provided context, which consists of the lecture slides/PDF and the relevant textbook content.
+
+The scribe must faithfully reconstruct what was taught in the lecture so that a student can rely on it later for revision.
+
+Include definitions, notation, assumptions, theorem or result statements, proofs or derivations, and worked examples only if they appear in the provided context.
+
+Do not introduce new examples, explanations, intuition, or material that is not present in the context.
+
+Maintain strict faithfulness to the lecture’s structure, scope, and logical flow.
+
+Organize the scribe clearly with appropriate sections and headings so it can be used directly for exam preparation.  make sure this is the only prompt no imporvisation would be done after this  

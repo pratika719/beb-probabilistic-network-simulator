@@ -1,0 +1,785 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\title{Lecture 4: Scribe}
+\date{}
+\author{}
+
+\begin{document}
+
+\maketitle
+
+\section{Continuous Random Variables}
+
+\subsection{Definition: Continuous Random Variable}
+A random variable $X$ is continuous if there exists a nonnegative function $f_X$, defined for all $x \in \mathbb{R}$, having the property that for every subset $B$ of the real line,
+\[
+P(X \in B) = \int_B f_X(x)\,dx
+\]
+The function $f_X$ is called the probability density function (pdf) of the random variable $X$.
+
+\subsection{Properties of Probability Density Function}
+For any pdf $f_X$:
+
+\begin{enumerate}
+    \item $f_X(x) \ge 0$ for all $x \in \mathbb{R}$
+    \item $\int_{-\infty}^{\infty} f_X(x)\,dx = 1$
+    \item For any interval $[a,b]$:
+    \[
+    P(a \le X \le b) = \int_a^b f_X(x)\,dx
+    \]
+    \item $P(X=a) = \int_a^a f_X(x)\,dx = 0$ for any $a \in \mathbb{R}$
+\end{enumerate}
+
+\subsection{Cumulative Distribution Function (CDF)}
+
+\subsubsection{Definition: CDF for Continuous Random Variable}
+The cumulative distribution function $F_X$ of a continuous random variable $X$ with pdf $f_X$ is defined by:
+\[
+F_X(x) = P(X \le x) = \int_{-\infty}^x f_X(t)\,dt, 
+\quad -\infty < x < \infty
+\]
+
+\subsubsection{Relationship between PDF and CDF}
+If $X$ is a continuous random variable with pdf $f_X$ and cdf $F_X$, then at all points $x$ at which the derivative $F'_X(x)$ exists:
+\[
+f_X(x) = \frac{d}{dx}F_X(x) = F'_X(x)
+\]
+
+\subsection{Expectation of Continuous Random Variable}
+
+\subsubsection{Definition: Expected Value}
+The expected value or expectation or mean of a continuous random variable $X$ with pdf $f_X$ is defined by:
+\[
+E[X] = \int_{-\infty}^{\infty} x f_X(x)\,dx
+\]
+provided that the integral exists (i.e., $\int_{-\infty}^{\infty} |x| f_X(x)\,dx < \infty$).
+
+\subsubsection{Expected Value of a Function of X}
+If $X$ is a continuous random variable with pdf $f_X$ and $g$ is a real-valued function, then:
+\[
+E[g(X)] = \int_{-\infty}^{\infty} g(x) f_X(x)\,dx
+\]
+provided the integral exists.
+
+\subsection{Variance and Standard Deviation}
+
+\subsubsection{Definition: Variance}
+The variance of a continuous random variable $X$ is defined by:
+\[
+\text{Var}(X) = E[(X - E[X])^2] = E[X^2] - (E[X])^2
+\]
+
+\subsubsection{Definition: Standard Deviation}
+The standard deviation of $X$ is defined by:
+\[
+\sigma_X = \sqrt{\text{Var}(X)}
+\]
+
+\subsection{Properties of Expectation and Variance}
+For a continuous random variable $X$ and constants $a,b \in \mathbb{R}$:
+
+\begin{enumerate}
+    \item $E[aX+b] = aE[X] + b$
+    \item $\text{Var}(aX+b) = a^2\text{Var}(X)$
+\end{enumerate}
+
+\section{Uniform Distribution}
+
+\subsection{Definition: Uniform Distribution}
+A random variable $X$ is said to be uniformly distributed over the interval $[a,b]$, denoted $X \sim U(a,b)$, if its pdf is given by:
+\[
+f_X(x) =
+\begin{cases}
+\frac{1}{b-a} & \text{if } a \le x \le b\\
+0 & \text{otherwise}
+\end{cases}
+\]
+
+\subsection{CDF of Uniform Distribution}
+The cumulative distribution function of $X \sim U(a,b)$ is:
+\[
+F_X(x) =
+\begin{cases}
+0 & \text{if } x < a\\
+\frac{x-a}{b-a} & \text{if } a \le x \le b\\
+1 & \text{if } x > b
+\end{cases}
+\]
+
+\subsection{Expectation and Variance of Uniform Distribution}
+For $X \sim U(a,b)$:
+\[
+E[X] = \frac{a+b}{2}
+\]
+\[
+\text{Var}(X) = \frac{(b-a)^2}{12}
+\]
+
+\subsubsection{Derivation of $E[X]$}
+\[
+E[X] = \int_{-\infty}^{\infty} x f_X(x)\,dx = \int_a^b x \cdot \frac{1}{b-a}\,dx
+\]
+\[
+= \frac{1}{b-a}\int_a^b x\,dx
+\]
+\[
+= \frac{1}{b-a}\left[\frac{x^2}{2}\right]_a^b
+\]
+\[
+= \frac{1}{b-a}\left(\frac{b^2}{2}-\frac{a^2}{2}\right)
+\]
+\[
+= \frac{1}{b-a}\cdot \frac{b^2-a^2}{2}
+\]
+\[
+= \frac{1}{b-a}\cdot \frac{(b-a)(b+a)}{2}
+\]
+\[
+= \frac{a+b}{2}
+\]
+
+\subsubsection{Derivation of $\text{Var}(X)$}
+First, calculate $E[X^2]$:
+\[
+E[X^2] = \int_{-\infty}^{\infty} x^2 f_X(x)\,dx = \int_a^b x^2 \cdot \frac{1}{b-a}\,dx
+\]
+\[
+= \frac{1}{b-a}\int_a^b x^2\,dx
+\]
+\[
+= \frac{1}{b-a}\left[\frac{x^3}{3}\right]_a^b
+\]
+\[
+= \frac{1}{b-a}\left(\frac{b^3}{3}-\frac{a^3}{3}\right)
+\]
+\[
+= \frac{b^3-a^3}{3(b-a)}
+\]
+\[
+= \frac{b^2+ab+a^2}{3}
+\]
+
+Then:
+\[
+\text{Var}(X) = E[X^2] - (E[X])^2
+\]
+\[
+= \frac{b^2+ab+a^2}{3} - \left(\frac{a+b}{2}\right)^2
+\]
+\[
+= \frac{b^2+ab+a^2}{3} - \frac{a^2+2ab+b^2}{4}
+\]
+\[
+= \frac{4(b^2+ab+a^2)-3(a^2+2ab+b^2)}{12}
+\]
+\[
+= \frac{4b^2+4ab+4a^2-3a^2-6ab-3b^2}{12}
+\]
+\[
+= \frac{b^2-2ab+a^2}{12}
+\]
+\[
+= \frac{(b-a)^2}{12}
+\]
+
+\subsection{Example 1: Uniform Distribution}
+Let $X \sim U(0,1)$. Find $P(X>0.3)$.
+
+\textbf{Solution:}
+\[
+P(X>0.3)=\int_{0.3}^1 f_X(x)\,dx
+\]
+\[
+= \int_{0.3}^1 1\,dx
+\]
+\[
+= [x]_{0.3}^1
+\]
+\[
+= 1-0.3
+\]
+\[
+= 0.7
+\]
+
+Alternatively, using the CDF:
+\[
+P(X>0.3)=1-P(X\le 0.3)
+\]
+\[
+=1-F_X(0.3)
+\]
+\[
+=1-\frac{0.3-0}{1-0}
+\]
+\[
+=1-0.3
+\]
+\[
+=0.7
+\]
+
+\subsection{Example 2: Uniform Distribution Application}
+Suppose buses arrive at a bus stop according to a uniform distribution over a 30-minute interval. If you arrive at the bus stop at a random time, what is the probability you will wait more than 10 minutes?
+
+\textbf{Solution:}
+
+Let $X$ be the time until the next bus arrives. Then $X \sim U(0,30)$.
+
+We need to find $P(X>10)$.
+\[
+P(X>10)=\int_{10}^{30}\frac{1}{30}\,dx
+\]
+\[
+= \frac{1}{30}[x]_{10}^{30}
+\]
+\[
+= \frac{1}{30}(30-10)
+\]
+\[
+= \frac{20}{30}
+\]
+\[
+= \frac{2}{3}
+\]
+
+\section{Exponential Distribution}
+
+\subsection{Definition: Exponential Distribution}
+A continuous random variable $X$ is said to have an exponential distribution with parameter $\lambda>0$, denoted $X \sim \text{Exp}(\lambda)$, if its pdf is given by:
+\[
+f_X(x)=
+\begin{cases}
+\lambda e^{-\lambda x} & \text{if } x\ge 0\\
+0 & \text{if } x<0
+\end{cases}
+\]
+
+\subsection{CDF of Exponential Distribution}
+The cumulative distribution function of $X \sim \text{Exp}(\lambda)$ is:
+\[
+F_X(x)=
+\begin{cases}
+0 & \text{if } x<0\\
+1-e^{-\lambda x} & \text{if } x\ge 0
+\end{cases}
+\]
+
+\subsubsection{Derivation}
+For $x\ge 0$:
+\[
+F_X(x)=P(X\le x)=\int_0^x \lambda e^{-\lambda t}\,dt
+\]
+
+Let $u=-\lambda t$, then $du=-\lambda dt$, so $dt=-du/\lambda$.
+
+When $t=0$, $u=0$; when $t=x$, $u=-\lambda x$.
+
+\[
+F_X(x)=\int_0^{-\lambda x} \lambda e^u\left(-\frac{du}{\lambda}\right)
+\]
+\[
+= -\int_0^{-\lambda x} e^u\,du
+\]
+\[
+= -[e^u]_0^{-\lambda x}
+\]
+\[
+= -(e^{-\lambda x}-1)
+\]
+\[
+= 1-e^{-\lambda x}
+\]
+
+\subsection{Expectation and Variance of Exponential Distribution}
+For $X \sim \text{Exp}(\lambda)$:
+\[
+E[X]=\frac{1}{\lambda}
+\]
+\[
+\text{Var}(X)=\frac{1}{\lambda^2}
+\]
+
+\subsubsection{Derivation of $E[X]$}
+\[
+E[X]=\int_0^\infty x\lambda e^{-\lambda x}\,dx
+\]
+
+Using integration by parts with $u=x$, $dv=\lambda e^{-\lambda x}dx$:
+\[
+du=dx,\quad v=-e^{-\lambda x}
+\]
+
+\[
+E[X]=[x(-e^{-\lambda x})]_0^\infty - \int_0^\infty (-e^{-\lambda x})\,dx
+\]
+\[
+=0+\int_0^\infty e^{-\lambda x}\,dx
+\]
+\[
+=\left[-\frac{1}{\lambda}e^{-\lambda x}\right]_0^\infty
+\]
+\[
+=-\frac{1}{\lambda}(0-1)
+\]
+\[
+=\frac{1}{\lambda}
+\]
+
+\subsubsection{Derivation of $\text{Var}(X)$}
+First, calculate $E[X^2]$:
+\[
+E[X^2]=\int_0^\infty x^2\lambda e^{-\lambda x}\,dx
+\]
+
+Using integration by parts:
+Let $u=x^2$, $dv=\lambda e^{-\lambda x}dx$:
+\[
+du=2x\,dx,\quad v=-e^{-\lambda x}
+\]
+
+\[
+E[X^2]=[x^2(-e^{-\lambda x})]_0^\infty - \int_0^\infty 2x(-e^{-\lambda x})\,dx
+\]
+\[
+=0+2\int_0^\infty xe^{-\lambda x}\,dx
+\]
+\[
+=2\cdot \frac{1}{\lambda}\int_0^\infty x\lambda e^{-\lambda x}\,dx
+\]
+\[
+=\frac{2}{\lambda}E[X]
+\]
+\[
+=\frac{2}{\lambda}\cdot \frac{1}{\lambda}
+\]
+\[
+=\frac{2}{\lambda^2}
+\]
+
+Then:
+\[
+\text{Var}(X)=E[X^2]-(E[X])^2
+\]
+\[
+=\frac{2}{\lambda^2}-\left(\frac{1}{\lambda}\right)^2
+\]
+\[
+=\frac{1}{\lambda^2}
+\]
+
+\subsection{Memoryless Property of Exponential Distribution}
+
+\subsubsection{Theorem: Memoryless Property}
+The exponential distribution has the memoryless property: for all $s,t\ge 0$,
+\[
+P(X>s+t\mid X>s)=P(X>t)
+\]
+
+\subsubsection{Proof}
+\[
+P(X>s+t\mid X>s)=\frac{P(X>s+t\text{ AND }X>s)}{P(X>s)}
+\]
+
+Since $X>s+t$ implies $X>s$:
+\[
+=\frac{P(X>s+t)}{P(X>s)}
+\]
+
+For $X\sim \text{Exp}(\lambda)$:
+\[
+P(X>x)=1-F_X(x)=e^{-\lambda x}
+\]
+
+Therefore:
+\[
+P(X>s+t\mid X>s)=\frac{e^{-\lambda(s+t)}}{e^{-\lambda s}}
+\]
+\[
+=e^{-\lambda t}
+\]
+\[
+=P(X>t)
+\]
+
+This completes the proof.
+
+\subsection{Example 3: Exponential Distribution}
+The time (in hours) required to repair a machine is an exponential random variable with parameter $\lambda=\frac{1}{2}$. What is the probability that a repair takes at least 3 hours?
+
+\textbf{Solution:}
+
+Let $X\sim \text{Exp}\left(\frac{1}{2}\right)$.
+
+We need $P(X\ge 3)$.
+\[
+P(X\ge 3)=1-P(X<3)
+\]
+\[
+=1-F_X(3)
+\]
+\[
+=1-\left(1-e^{-(1/2)\cdot 3}\right)
+\]
+\[
+=e^{-3/2}
+\]
+\[
+\approx 0.2231
+\]
+
+Alternatively:
+\[
+P(X\ge 3)=\int_3^\infty \frac{1}{2}e^{-(1/2)x}\,dx
+\]
+\[
+=[-e^{-(1/2)x}]_3^\infty
+\]
+\[
+=e^{-3/2}
+\]
+
+\subsection{Example 4: Memoryless Property Application}
+Suppose the lifetime of a component (in years) is exponentially distributed with mean 5 years. If the component has already lasted 3 years, what is the probability it will last at least 2 more years?
+
+\textbf{Solution:}
+
+Since $E[X]=5$ and $E[X]=1/\lambda$, we have $\lambda=1/5$.
+
+So $X\sim \text{Exp}(1/5)$.
+
+We need:
+\[
+P(X\ge 5 \mid X\ge 3)=P(X\ge 3+2\mid X\ge 3)
+\]
+
+By memoryless property:
+\[
+P(X\ge 3+2\mid X\ge 3)=P(X\ge 2)
+\]
+\[
+=1-F_X(2)
+\]
+\[
+=1-\left(1-e^{-(1/5)\cdot 2}\right)
+\]
+\[
+=e^{-2/5}
+\]
+\[
+\approx 0.6703
+\]
+
+\section{Normal (Gaussian) Distribution}
+
+\subsection{Definition: Normal Distribution}
+A continuous random variable $X$ is said to have a normal (or Gaussian) distribution with parameters $\mu$ and $\sigma^2$ (where $\mu\in \mathbb{R}$ and $\sigma>0$), denoted $X\sim N(\mu,\sigma^2)$, if its pdf is given by:
+\[
+f_X(x)=\frac{1}{\sigma\sqrt{2\pi}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right),
+\quad -\infty<x<\infty
+\]
+
+\subsection{Parameters of Normal Distribution}
+\begin{itemize}
+    \item $\mu$: mean (location parameter)
+    \item $\sigma^2$: variance (scale parameter)
+    \item $\sigma$: standard deviation
+\end{itemize}
+
+\subsection{Expectation and Variance of Normal Distribution}
+For $X\sim N(\mu,\sigma^2)$:
+\[
+E[X]=\mu
+\]
+\[
+\text{Var}(X)=\sigma^2
+\]
+
+\subsection{Standard Normal Distribution}
+
+\subsubsection{Definition: Standard Normal Distribution}
+A normal random variable with $\mu=0$ and $\sigma^2=1$ is called a standard normal random variable, denoted $Z\sim N(0,1)$.
+
+The pdf of $Z$ is:
+\[
+\phi(z)=\frac{1}{\sqrt{2\pi}}e^{-z^2/2},
+\quad -\infty<z<\infty
+\]
+
+The cdf of $Z$ is denoted by:
+\[
+\Phi(z)=P(Z\le z)=\int_{-\infty}^z \frac{1}{\sqrt{2\pi}}e^{-t^2/2}\,dt
+\]
+
+\subsection{Properties of Standard Normal CDF}
+\begin{enumerate}
+    \item $\Phi(-z)=1-\Phi(z)$ for all $z\in \mathbb{R}$
+    \item $P(Z>z)=1-\Phi(z)$
+    \item $P(a<Z\le b)=\Phi(b)-\Phi(a)$
+\end{enumerate}
+
+\subsection{Standardization}
+
+\subsubsection{Theorem: Standardization}
+If $X\sim N(\mu,\sigma^2)$, then the random variable
+\[
+Z=\frac{X-\mu}{\sigma}
+\]
+has a standard normal distribution, i.e., $Z\sim N(0,1)$.
+
+\subsection{Computing Probabilities for Normal Random Variables}
+For $X\sim N(\mu,\sigma^2)$:
+\[
+P(X\le x)=P\left(\frac{X-\mu}{\sigma}\le \frac{x-\mu}{\sigma}\right)
+= P\left(Z\le \frac{x-\mu}{\sigma}\right)
+= \Phi\left(\frac{x-\mu}{\sigma}\right)
+\]
+
+\subsection{Example 5: Normal Distribution}
+Let $X\sim N(10,4)$. Find $P(X\le 12)$.
+
+\textbf{Solution:}
+
+Here $\mu=10$ and $\sigma^2=4$, so $\sigma=2$.
+
+\[
+P(X\le 12)=P\left(\frac{X-10}{2}\le \frac{12-10}{2}\right)
+\]
+\[
+=P(Z\le 1)=\Phi(1)\approx 0.8413
+\]
+
+\subsection{Example 6: Normal Distribution Probability}
+Let $X\sim N(50,25)$. Find $P(45<X<60)$.
+
+\textbf{Solution:}
+
+Here $\mu=50$ and $\sigma^2=25$, so $\sigma=5$.
+
+\[
+P(45<X<60)=P\left(\frac{45-50}{5}<\frac{X-50}{5}<\frac{60-50}{5}\right)
+\]
+\[
+=P(-1<Z<2)
+\]
+\[
+=\Phi(2)-\Phi(-1)
+\]
+\[
+=\Phi(2)-(1-\Phi(1))
+\]
+\[
+=\Phi(2)+\Phi(1)-1
+\]
+\[
+=0.9772+0.8413-1
+\]
+\[
+=0.8185
+\]
+
+\subsection{Example 7: Finding Values from Probabilities}
+Let $X\sim N(100,100)$. Find the value $c$ such that $P(X\le c)=0.95$.
+
+\textbf{Solution:}
+
+Here $\mu=100$ and $\sigma^2=100$, so $\sigma=10$.
+
+\[
+P\left(\frac{X-100}{10}\le \frac{c-100}{10}\right)=0.95
+\]
+\[
+P\left(Z\le \frac{c-100}{10}\right)=0.95
+\]
+
+From standard normal tables, $\Phi(1.645)\approx 0.95$.
+
+\[
+\frac{c-100}{10}=1.645
+\]
+\[
+c=116.45
+\]
+
+\subsection{Linear Transformation of Normal Random Variables}
+
+\subsubsection{Theorem: Linear Transformation}
+If $X\sim N(\mu,\sigma^2)$ and $Y=aX+b$ where $a\neq 0$ and $b$ are constants, then:
+\[
+Y\sim N(a\mu+b,a^2\sigma^2)
+\]
+
+\subsubsection{Proof Outline}
+Using properties of expectation and variance:
+\[
+E[Y]=E[aX+b]=aE[X]+b=a\mu+b
+\]
+\[
+\text{Var}(Y)=\text{Var}(aX+b)=a^2\text{Var}(X)=a^2\sigma^2
+\]
+
+\subsection{Example 8: Linear Transformation}
+Let $X\sim N(5,9)$. Define $Y=2X-3$. Find the distribution of $Y$.
+
+\textbf{Solution:}
+
+Here $X\sim N(5,9)$, so $\mu=5$ and $\sigma^2=9$.
+
+For $Y=2X-3$, we have $a=2$ and $b=-3$.
+
+\[
+\mu_Y=a\mu+b=2(5)-3=7
+\]
+\[
+\sigma_Y^2=a^2\sigma^2=2^2(9)=36
+\]
+
+Therefore:
+\[
+Y\sim N(7,36)
+\]
+
+\section{Gamma Distribution}
+
+\subsection{Gamma Function}
+
+\subsubsection{Definition: Gamma Function}
+The gamma function $\Gamma(\alpha)$ is defined for $\alpha>0$ by:
+\[
+\Gamma(\alpha)=\int_0^\infty x^{\alpha-1}e^{-x}\,dx
+\]
+
+\subsubsection{Properties of Gamma Function}
+\begin{enumerate}
+    \item $\Gamma(\alpha)=(\alpha-1)\Gamma(\alpha-1)$ for $\alpha>1$
+
+    \textbf{Derivation:}
+    \[
+    \Gamma(\alpha)=\int_0^\infty x^{\alpha-1}e^{-x}\,dx
+    \]
+    Using integration by parts with $u=x^{\alpha-1}$, $dv=e^{-x}dx$:
+    \[
+    du=(\alpha-1)x^{\alpha-2}dx,\quad v=-e^{-x}
+    \]
+    \[
+    \Gamma(\alpha)=\left[x^{\alpha-1}(-e^{-x})\right]_0^\infty
+    -\int_0^\infty (\alpha-1)x^{\alpha-2}(-e^{-x})\,dx
+    \]
+    \[
+    =(\alpha-1)\int_0^\infty x^{\alpha-2}e^{-x}\,dx
+    \]
+    \[
+    =(\alpha-1)\Gamma(\alpha-1)
+    \]
+
+    \item $\Gamma(n)=(n-1)!$ for $n\in \mathbb{N}$
+
+    \textbf{Derivation:}
+
+    From property 1:
+    \[
+    \Gamma(n)=(n-1)\Gamma(n-1)
+    =(n-1)(n-2)\Gamma(n-2)=\cdots
+    \]
+    We need $\Gamma(1)$:
+    \[
+    \Gamma(1)=\int_0^\infty e^{-x}\,dx=\left[-e^{-x}\right]_0^\infty=1
+    \]
+    Therefore:
+    \[
+    \Gamma(n)=(n-1)!
+    \]
+
+    \item $\Gamma(1/2)=\sqrt{\pi}$
+\end{enumerate}
+
+\subsection{Definition: Gamma Distribution}
+A continuous random variable $X$ is said to have a gamma distribution with shape parameter $\alpha>0$ and rate parameter $\lambda>0$, denoted $X\sim \text{Gamma}(\alpha,\lambda)$, if its pdf is given by:
+\[
+f_X(x)=
+\begin{cases}
+\frac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\lambda x} & \text{if } x>0\\
+0 & \text{if } x\le 0
+\end{cases}
+\]
+
+\subsection{Expectation and Variance of Gamma Distribution}
+For $X\sim \text{Gamma}(\alpha,\lambda)$:
+\[
+E[X]=\frac{\alpha}{\lambda}
+\]
+\[
+\text{Var}(X)=\frac{\alpha}{\lambda^2}
+\]
+
+\subsubsection{Derivation of $E[X]$}
+\[
+E[X]=\int_0^\infty x\cdot \frac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\lambda x}\,dx
+\]
+\[
+=\frac{\lambda^\alpha}{\Gamma(\alpha)}\int_0^\infty x^\alpha e^{-\lambda x}\,dx
+\]
+
+Let $u=\lambda x$, then $x=u/\lambda$ and $dx=du/\lambda$:
+\[
+=\frac{\lambda^\alpha}{\Gamma(\alpha)}\int_0^\infty \left(\frac{u}{\lambda}\right)^\alpha e^{-u}\frac{du}{\lambda}
+\]
+\[
+=\frac{1}{\lambda\Gamma(\alpha)}\int_0^\infty u^\alpha e^{-u}\,du
+\]
+\[
+=\frac{1}{\lambda\Gamma(\alpha)}\Gamma(\alpha+1)
+\]
+
+Using $\Gamma(\alpha+1)=\alpha\Gamma(\alpha)$:
+\[
+E[X]=\frac{\alpha}{\lambda}
+\]
+
+\subsection{Relationship Between Exponential and Gamma Distributions}
+The exponential distribution is a special case of the gamma distribution:
+\[
+\text{Exp}(\lambda)=\text{Gamma}(1,\lambda)
+\]
+
+\subsubsection{Verification}
+For $\text{Gamma}(1,\lambda)$:
+\[
+f_X(x)=\frac{\lambda^1}{\Gamma(1)}x^{1-1}e^{-\lambda x}
+=\lambda e^{-\lambda x},\quad x>0
+\]
+which matches the exponential pdf.
+
+\subsection{Example 9: Gamma Distribution}
+Let $X\sim \text{Gamma}(3,2)$. Find $E[X]$ and $\text{Var}(X)$.
+
+\textbf{Solution:}
+
+Here $\alpha=3$ and $\lambda=2$.
+
+\[
+E[X]=\frac{\alpha}{\lambda}=\frac{3}{2}=1.5
+\]
+\[
+\text{Var}(X)=\frac{\alpha}{\lambda^2}=\frac{3}{4}=0.75
+\]
+
+\subsection{Example 10: Gamma Distribution Application}
+The time (in hours) to complete a task follows a $\text{Gamma}(4,1/2)$ distribution. What is the expected time to complete the task?
+
+\textbf{Solution:}
+
+Here $\alpha=4$ and $\lambda=1/2$.
+
+\[
+E[X]=\frac{\alpha}{\lambda}=\frac{4}{1/2}=8
+\]
+
+The expected time is 8 hours.
+
+\end{document}

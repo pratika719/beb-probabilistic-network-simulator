@@ -1,0 +1,9 @@
+You have to make an academic and professional scribe a formal lecture scribe and it should be based strictly on the attached lecture ppt exclusively. This scribe is for closed notes exam and that is why it should focus on being correct, precise and based strictly on the source and not on creative explanation.
+Content: 
+1. Include all the definitions, mathematical notations and all the assumptions. There should be full statements and theorems mentioned.
+2. You have to include all the proofs and derivations and examples and every step of it.
+3. Don't make it creative, simplified or summary. Don't include any external example or intuition.
+Structure:
+1. It should follow the same structural and logical flow as the provided material.
+2. The content should be clear with appropriate headings and subheadings for coherence of the concepts logically.
+3. A student should be able to rely on it for revising the concept taught in that lecture.

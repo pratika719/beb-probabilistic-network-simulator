@@ -1,0 +1,268 @@
+
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\title{CSE400: Fundamentals of Probability in Computing \\
+Lecture 9 -- Uniform, Exponential, Laplace and Gamma Random Variables}
+\author{Dhaval Patel, PhD}
+\date{February 2, 2026}
+
+\begin{document}
+\maketitle
+
+\section*{Outline}
+\begin{itemize}
+    \item Types of Continuous Random Variables
+    \begin{itemize}
+        \item Uniform Random Variable: Example
+        \item Exponential Random Variable: Example
+        \item Laplace Random Variable: Example
+        \item Gamma Random Variable
+    \end{itemize}
+    \item Graphs and Special Cases
+    \item Problem Solving
+    \item Applications
+\end{itemize}
+
+\section{Uniform Random Variable}
+
+\subsection*{Definition (PDF)}
+Let $X$ be a uniform random variable on $[a,b)$. The probability density function (PDF) is
+\[
+ f_X(x) = \begin{cases}
+ \frac{1}{b-a}, & a \le x < b, \\
+ 0, & \text{elsewhere.}
+ \end{cases}
+\]
+
+\subsection*{Definition (CDF)}
+The cumulative distribution function (CDF) is
+\[
+ F_X(x) = \begin{cases}
+ 0, & x < a, \\
+ \frac{x-a}{b-a}, & a \le x < b, \\
+ 1, & x \ge b.
+ \end{cases}
+\]
+
+\section{Example 1: Uniform Random Variable}
+
+\subsection*{Problem}
+The phase of a sinusoid, $\Theta$, is uniformly distributed over $[0,2\pi)$ with PDF
+\[
+ f_{\Theta}(\theta) = \begin{cases}
+ \frac{1}{2\pi}, & 0 \le \theta < 2\pi, \\
+ 0, & \text{otherwise.}
+ \end{cases}
+\]
+
+\subsection*{(a) $\Pr(\Theta > \frac{3\pi}{4})$}
+For a uniform random variable on $[0,2\pi)$:
+\[
+ \Pr(a < \Theta < b) = \frac{b-a}{2\pi}.
+\]
+Thus,
+\[
+ \Pr\left(\Theta > \frac{3\pi}{4}\right) = \frac{2\pi - \frac{3\pi}{4}}{2\pi} = \frac{5}{8}.
+\]
+
+\subsection*{(b) $\Pr(\Theta < \pi \mid \Theta > \frac{3\pi}{4})$}
+\[
+ \Pr(A\mid B) = \frac{\Pr(A \cap B)}{\Pr(B)}.
+\]
+\[
+ \Pr\left(\frac{3\pi}{4} < \Theta < \pi\right) = \frac{\pi - \frac{3\pi}{4}}{2\pi} = \frac{1}{8},
+\]
+\[
+ \Pr\left(\Theta > \frac{3\pi}{4}\right) = \frac{5}{8}.
+\]
+Therefore,
+\[
+ \Pr\left(\Theta < \pi \mid \Theta > \frac{3\pi}{4}\right) = \frac{1/8}{5/8} = \frac{1}{5}.
+\]
+
+\subsection*{(c) $\Pr(\cos(\Theta) < \frac{1}{2})$}
+\[
+ \cos(\Theta) = \frac{1}{2} \Rightarrow \Theta = \frac{\pi}{3}, \frac{5\pi}{3}.
+\]
+\[
+ \cos(\Theta) < \frac{1}{2} \quad \text{for} \quad \frac{\pi}{3} < \Theta < \frac{5\pi}{3}.
+\]
+\[
+ \Pr\left(\cos(\Theta) < \frac{1}{2}\right) = \frac{\frac{5\pi}{3} - \frac{\pi}{3}}{2\pi} = \frac{2}{3}.
+\]
+
+\section{Exponential Random Variable}
+
+\subsection*{Definition}
+The exponential random variable has PDF and CDF (for $b>0$):
+\[
+ f_X(x) = \frac{1}{b} e^{-x/b} u(x),
+\]
+\[
+ F_X(x) = \left[1 - e^{-x/b}\right] u(x).
+\]
+
+\section{Example 2: Exponential Random Variable}
+
+\subsection*{Problem}
+Let $X$ be an exponential random variable with PDF $f_X(x)=e^{-x}u(x)$.
+
+\subsection*{(a) $\Pr(3X<5)$}
+\[
+ \Pr(3X<5) = \Pr\left(X<\frac{5}{3}\right) = F_X\left(\frac{5}{3}\right) = 1-e^{-5/3}.
+\]
+
+\subsection*{(b) $\Pr(3X<y)$}
+\[
+ \Pr(3X<y) = \Pr\left(X<\frac{y}{3}\right) = F_X\left(\frac{y}{3}\right) = \left[1-e^{-y/3}\right]u(y).
+\]
+
+\subsection*{(c) Let $Y=3X$. Find $f_Y(y)$.}
+From part (b),
+\[
+ F_Y(y) = \left[1-e^{-y/3}\right]u(y).
+\]
+Differentiating,
+\[
+ f_Y(y) = \frac{d}{dy}F_Y(y) = \frac{1}{3}e^{-y/3}u(y).
+\]
+
+\section{Laplace Random Variable}
+
+\subsection*{Definition}
+\[
+ f_X(x) = \frac{1}{2b}\exp\left(-\frac{|x|}{b}\right).
+\]
+\[
+ F_X(x) = \begin{cases}
+ \frac{1}{2}e^{x/b}, & x<0, \\
+ 1-\frac{1}{2}e^{-x/b}, & x\ge0.
+ \end{cases}
+\]
+
+\section{Example 3: Laplace Random Variable}
+
+Let $W$ have PDF $f_W(w)=ce^{-2|w|}$.
+
+\subsection*{(a) Find $c$}
+\[
+ \int_{-\infty}^{\infty} ce^{-2|w|}dw = 2c\int_0^{\infty}e^{-2w}dw = c = 1.
+\]
+
+\subsection*{(b) $\Pr(-1<W<2)$}
+\[
+ \Pr(-1<W<2)=\frac{1}{2}(1-e^{-2})+\frac{1}{2}(1-e^{-4})=1-\frac{1}{2}(e^{-2}+e^{-4}).
+\]
+
+\subsection*{(c) $\Pr(W>0\mid -1<W<2)$}
+\[
+ \Pr(W>0\mid -1<W<2)=\frac{\frac{1}{2}(1-e^{-4})}{1-\frac{1}{2}(e^{-2}+e^{-4})}.
+\]
+
+\section{Gamma Random Variable}
+
+\subsection*{Definition}
+\[
+ f_X(x)=\frac{x^{\alpha-1}e^{-x/b}}{b^{\alpha}\Gamma(\alpha)}u(x).
+\]
+\[
+ F_X(x)=\frac{\gamma(\alpha,x/b)}{\Gamma(\alpha)}u(x).
+\]
+
+\subsection*{Gamma Functions}
+\[
+ \Gamma(\alpha)=\int_0^{\infty}t^{\alpha-1}e^{-t}dt.
+\]
+\[
+ \gamma(\alpha,\beta)=\int_0^{\beta}t^{\alpha-1}e^{-t}dt.
+\]
+
+\section{Example 4: Gamma Random Variable}
+
+Let $X\sim \text{Gamma}(\alpha,\lambda)$.
+
+\subsection*{Mean}
+\[
+ E[X]=\frac{\Gamma(\alpha+1)}{\lambda\Gamma(\alpha)}=\frac{\alpha}{\lambda}.
+\]
+
+\subsection*{Variance}
+\[
+ E[X^2]=\frac{\alpha(\alpha+1)}{\lambda^2}, \quad \text{Var}(X)=\frac{\alpha}{\lambda^2}.
+\]
+
+\section{Example 5: Properties of Gamma Function}
+\begin{enumerate}[label=(\alph*)]
+    \item $\Gamma(n)=(n-1)!$, $n=1,2,3,\dots$
+    \item $\Gamma(x+1)=x\Gamma(x)$
+    \item $\Gamma(1/2)=\sqrt{\pi}$
+\end{enumerate}
+
+\section{Problem Solving 1: Movie Theater}
+Arrival time:
+\[
+ A=d+T_r.
+\]
+Expected cost:
+\[
+ E[C(d)]=\int_0^{T-d}c(T-d-t)f(t)dt+\int_{T-d}^{\infty}k(t+d-T)f(t)dt.
+\]
+Optimality condition:
+\[
+ F(T-d^*)=\frac{k}{c+k}, \quad d^*=T-F^{-1}\left(\frac{k}{c+k}\right).
+\]
+
+\section{Problem Solving 2: CDF Analysis}
+Given
+\[
+ F_X(x)=\begin{cases}
+ 0, & x<0,\\
+ x^2, & 0\le x\le1,\\
+ 1, & x>1.
+ \end{cases}
+\]
+\[
+ f_X(x)=2x,\; 0\le x\le1.
+\]
+\[
+ \mu=\frac{2}{3},\quad \sigma^2=\frac{1}{18},\quad c_s=-\frac{2\sqrt{2}}{5},\quad c_k=\frac{12}{5}.
+\]
+
+\section*{Density Estimation: Learning from Data and Applications}
+
+Density estimation is the problem of estimating the probability density function (PDF) of a continuous random variable using observed data. Let $X_1, X_2, \ldots, X_n$ be independent and identically distributed samples drawn from an unknown distribution with density $f_X(x)$. The objective is to construct an estimator $\hat{f}_X(x)$ such that $\hat{f}_X(x) \approx f_X(x)$.
+
+\subsection*{Histogram-Based Density Estimation}
+The histogram method partitions the range of data into disjoint intervals (bins) of equal width $h$. Let $N_k$ denote the number of observations that fall into the $k$-th bin. The histogram density estimator is defined as
+\[
+\hat{f}_X(x) = \frac{N_k}{n h}, \quad x \text{ belongs to bin } k.
+\]
+This estimator satisfies the normalization condition
+\[
+\int_{-\infty}^{\infty} \hat{f}_X(x)\,dx = 1.
+\]
+
+\subsection*{Kernel Density Estimation}
+Kernel density estimation provides a smooth estimate of the density. Let $K(\cdot)$ be a kernel function such that
+\[
+\int_{-\infty}^{\infty} K(u)\,du = 1.
+\]
+For a bandwidth parameter $h > 0$, the kernel density estimator is given by
+\[
+\hat{f}_X(x) = \frac{1}{n h} \sum_{i=1}^{n} K\left(\frac{x - X_i}{h}\right).
+\]
+
+\subsection*{Learning from Data}
+Density estimation is a fundamental task in learning from data. It enables probabilistic modeling of unknown continuous distributions using finite samples. Once a density is estimated, probabilities, expectations, and likelihoods can be computed directly from data.
+
+\subsection*{Applications}
+Density estimation is widely used in pattern recognition, anomaly detection, signal processing, and statistical inference. It also forms the basis for clustering, classification, and probabilistic decision-making systems.
+
+\end{document}
+```

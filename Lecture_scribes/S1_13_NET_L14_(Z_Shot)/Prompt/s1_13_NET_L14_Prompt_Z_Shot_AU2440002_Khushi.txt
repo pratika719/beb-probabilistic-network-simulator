@@ -1,0 +1,39 @@
+Create a lecture scribe to be used as exam oriented reference content to be used with a reading based / closed notes examination.
+
+Work with the attached lecture slides/ PDF and the corresponding textbook materials as the background information only. Do not use outside knowledge. Do not make any inferences not directly available in the given documents.
+
+The tutorial session in the lecture was problem solving. Restructure the session accurately and fully.
+
+The scribe must:
+
+-Adhere to the arrangement and sequence of the subjects as in the lecture materials. 
+
+-Provide all definitions and notation. 
+
+-Indicate all assumptions and conditions. 
+
+-Give all statement of the theorems or formal results which occur in the set-up. 
+
+-Current evidence and inferences step by step just as presented on the materials. 
+
+-Write out all of the examples and solved problems in stages. 
+
+-Maintain rational relations among ideas and solutions. 
+
+-Be precise mathematically. 
+
+-Write clear headings of sections and systematic arrangement befitting revision. 
+
+The scribe must not:
+
+-Introduce intuition, comments, simplifications, or imaginative explanations that are not already found in the materials. 
+
+-Present new examples or other approaches to solutions. 
+
+-Eliminate the middle reasoning steps that are discussed in the lecture. 
+
+-Rearrange the material so as to alter the logical sequence of the lecture. 
+
+-Justify your rationale. 
+
+The finished work should be a faithful copy of what was being taught to the point that a student will only use this paper to refresh the lecture materials to take an exam.

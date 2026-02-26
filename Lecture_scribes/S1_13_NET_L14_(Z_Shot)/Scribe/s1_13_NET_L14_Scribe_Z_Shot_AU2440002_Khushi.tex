@@ -1,0 +1,341 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{CSE 400: Fundamentals of Probability in Computing\\
+Tutorial--2 Lecture Scribe}
+\date{}
+\begin{document}
+\maketitle
+
+\section*{Q1. Random Point on a Line Segment}
+
+Let a point be chosen at a distance $x$ from one end of a segment of length $L$, where
+\[
+0 < x < L.
+\]
+
+Two segments are formed: $x$ and $L-x$. Define
+\[
+R = \frac{\min(x,L-x)}{\max(x,L-x)}.
+\]
+We compute $P\left(R < \frac14\right)$.
+
+\subsection*{Case 1: $x \le \frac{L}{2}$}
+\[
+\frac{x}{L-x} < \frac14
+\]
+\[
+4x < L-x
+\]
+\[
+5x < L
+\]
+\[
+x < \frac{L}{5}.
+\]
+
+\subsection*{Case 2: $x > \frac{L}{2}$}
+\[
+\frac{L-x}{x} < \frac14
+\]
+\[
+4(L-x) < x
+\]
+\[
+4L - 4x < x
+\]
+\[
+5x > 4L
+\]
+\[
+x > \frac{4L}{5}.
+\]
+
+Valid region:
+\[
+x \in \left(0,\frac{L}{5}\right) \cup \left(\frac{4L}{5},L\right).
+\]
+
+Total valid length:
+\[
+\frac{L}{5} + \frac{L}{5} = \frac{2L}{5}.
+\]
+
+Since uniform:
+\[
+P = \frac{2L/5}{L} = \frac{2}{5}.
+\]
+
+\section*{Q2. Bayesian Classification with Normal Distributions}
+
+White region:
+\[
+X|W \sim N(4,4), \quad \sigma_1 = 2.
+\]
+
+Black region:
+\[
+X|B \sim N(6,9), \quad \sigma_2 = 3.
+\]
+
+\[
+P(B)=\alpha, \quad P(W)=1-\alpha.
+\]
+
+Condition:
+\[
+P(B|X=5)=\frac12.
+\]
+
+Bayes' theorem:
+\[
+P(B|X=5)=\frac{\alpha f(5|B)}{\alpha f(5|B)+(1-\alpha)f(5|W)}.
+\]
+
+Normal density:
+\[
+f(x)=\frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}.
+\]
+
+\[
+f(5|B)=\frac{1}{3\sqrt{2\pi}} e^{-1/18}, \quad
+f(5|W)=\frac{1}{2\sqrt{2\pi}} e^{-1/8}.
+\]
+
+Substitute:
+\[
+\frac{3\alpha}{3\alpha+2(1-\alpha)e^{-5/72}}=\frac12.
+\]
+
+Using $e^{-5/72}\approx0.93$:
+\[
+6\alpha=3\alpha+2(1-\alpha)(0.93).
+\]
+
+\[
+3\alpha=1.86-1.86\alpha.
+\]
+
+\[
+4.86\alpha=1.86.
+\]
+
+\[
+\alpha\approx0.3827.
+\]
+
+\section*{Q3. Minimizing Expected Distance}
+
+\subsection*{(a) $X \sim \text{Uniform}(0,A)$}
+
+\[
+f_X(x)=\frac1A.
+\]
+
+\[
+E[|X-a|]=\int_0^a (a-x)\frac1A dx + \int_a^A (x-a)\frac1A dx.
+\]
+
+Result:
+\[
+\frac{2a^2-2aA+A^2}{2A}.
+\]
+
+Differentiate:
+\[
+\frac{1}{2A}(4a-2A)=0.
+\]
+
+\[
+a=\frac{A}{2}.
+\]
+
+\subsection*{(b) $X \sim \text{Exponential}(\lambda)$}
+
+\[
+f_X(x)=\lambda e^{-\lambda x}.
+\]
+
+Derivative condition:
+\[
+\frac{d}{da}E[|X-a|]=1-2e^{-\lambda a}=0.
+\]
+
+\[
+e^{-\lambda a}=\frac12.
+\]
+
+\[
+a=\frac{\ln 2}{\lambda}.
+\]
+
+\section*{Q4. Mixture of Exponentials}
+
+\[
+P(X>t)=p_1 e^{-\lambda_1 t}+p_2 e^{-\lambda_2 t}.
+\]
+
+\[
+P(X>t+s)=p_1 e^{-\lambda_1(t+s)}+p_2 e^{-\lambda_2(t+s)}.
+\]
+
+\[
+P(X>t+s|X>t)=
+\frac{p_1 e^{-\lambda_1(t+s)}+p_2 e^{-\lambda_2(t+s)}}
+{p_1 e^{-\lambda_1 t}+p_2 e^{-\lambda_2 t}}.
+\]
+
+\section*{Q5. Conditional Distribution of Poisson Variables}
+
+\[
+X\sim \text{Poisson}(\lambda_1), \quad
+Y\sim \text{Poisson}(\lambda_2).
+\]
+
+\[
+P(X=k|X+Y=n)
+=
+\binom{n}{k}
+\left(\frac{\lambda_1}{\lambda_1+\lambda_2}\right)^k
+\left(\frac{\lambda_2}{\lambda_1+\lambda_2}\right)^{n-k}.
+\]
+
+\section*{Q6. Transformation of Random Variables}
+
+\[
+X\sim \text{Uniform}[-2,2], \quad f_X(x)=\frac14.
+\]
+
+\[
+g(x)=
+\begin{cases}
+x, & x\in[-2,-1],\\
+0, & x\in(-1,1),\\
+x, & x\in[1,2].
+\end{cases}
+\]
+
+\subsection*{CDF}
+
+\[
+F_Y(y)=0, \quad y<-2.
+\]
+
+\[
+F_Y(y)=\frac{y+2}{4}, \quad -2\le y<-1.
+\]
+
+\[
+F_Y(y)=\frac14, \quad -1\le y<0.
+\]
+
+\[
+P(Y=0)=\frac12.
+\]
+
+\[
+F_Y(0)=\frac34.
+\]
+
+\[
+F_Y(y)=\frac34, \quad 0<y<1.
+\]
+
+\[
+F_Y(y)=\frac{y+2}{4}, \quad 1\le y\le2.
+\]
+
+\[
+F_Y(y)=1, \quad y>2.
+\]
+
+\subsection*{PDF}
+
+\[
+f_Y(y)=\frac14, \quad -2<y<-1.
+\]
+
+\[
+f_Y(y)=\frac14, \quad 1<y<2.
+\]
+
+\[
+P(Y=0)=\frac12.
+\]
+
+\section*{Q7. Binomial Stock Model}
+
+\[
+S_{1000}=S_0 u^k d^{1000-k}.
+\]
+
+Condition:
+\[
+k(\ln u-\ln d)+1000\ln d \ge \ln(1.30).
+\]
+
+\[
+k\ge470.
+\]
+
+\[
+k\sim \text{Binomial}(1000,0.52).
+\]
+
+\[
+P(k\ge470)=\sum_{k=470}^{1000}
+\binom{1000}{k}(0.52)^k(0.48)^{1000-k}.
+\]
+
+\section*{Q8. Exponential Repair Time}
+
+\[
+X\sim \text{Exponential}\left(\frac12\right).
+\]
+
+\[
+P(X>2)=e^{-1}.
+\]
+
+\[
+P(X\ge10|X>9)=e^{-1/2}.
+\]
+
+\section*{Q9. Distribution of $Z=\sqrt{X^2+Y^2}$}
+
+\[
+F_Z(z)=\int_{-z}^{z}
+\int_{-\sqrt{z^2-x^2}}^{\sqrt{z^2-x^2}}
+f_X(x)f_Y(y)\,dy\,dx.
+\]
+
+\[
+f_Z(z)=
+z\int_{-z}^{z}
+\frac{f_X(x)\left[f_Y(\sqrt{z^2-x^2})+f_Y(-\sqrt{z^2-x^2})\right]}
+{\sqrt{z^2-x^2}}
+dx.
+\]
+
+\section*{Q10. Joint Distribution of $M_n$ and $M_{n+1}$}
+
+\[
+M_n=\max(X_1,\dots,X_n).
+\]
+
+\[
+P(M_n\le x)=F(x)^n.
+\]
+
+Joint CDF:
+\[
+P(M_n\le x, M_{n+1}\le y)=
+\begin{cases}
+F(x)^n F(y), & x\le y,\\
+F(y)^{n+1}, & x>y.
+\end{cases}
+\]
+
+\end{document}

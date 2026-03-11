@@ -1,0 +1,25 @@
+Prepare a formal academic lecture scribe intended to function as exam-oriented reference material for a closed-notes examination.
+
+Use only the attached lecture slides/PDF and the corresponding relevant textbook material as the source of information. The scribe must remain strictly faithful to these materials and must not introduce information that is not explicitly contained in the provided context.
+
+The lecture includes conceptual explanations and problem-solving components. Reconstruct the material accurately and completely according to how it appears in the lecture.
+
+The lecture scribe must:
+
+• Follow the same logical order and progression of topics used in the lecture materials.
+• Include all definitions, symbols, and mathematical notation introduced in the lecture.
+• Clearly identify all assumptions and conditions when they are presented.
+• State all theorems, propositions, or formal results exactly as they appear in the lecture.
+• Reproduce proofs, derivations, and worked examples step by step whenever they occur in the lecture material.
+• Maintain the logical relationships between concepts, results, and example solutions.
+• Ensure mathematical precision and clarity throughout the document.
+• Use clear section headings and structured organization so that the document can be used effectively for exam revision.
+
+The lecture scribe must not:
+
+• Add interpretations, intuitive explanations, or commentary that are not explicitly stated in the lecture materials.
+• Introduce new examples, alternative solution methods, or additional problems.
+• Skip intermediate steps in proofs, derivations, or example solutions that are shown in the lecture.
+• Modify or reorganize the lecture material in a way that changes its logical sequence.
+
+The final document should accurately reflect what was taught in the lecture so that a student can rely on it as a complete reference when revising for an examination.

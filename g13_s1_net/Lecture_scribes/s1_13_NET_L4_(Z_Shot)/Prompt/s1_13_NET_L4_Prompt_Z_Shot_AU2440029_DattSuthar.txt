@@ -1,0 +1,13 @@
+Generate a lecture scribe intended to serve as reference material for exam preparation. 
+Use only the provided material. The scribe must strictly follow the content, structure, and scope of the provided materials and must not introduce any information, examples, explanations, or interpretations that are not present in the context. 
+The lecture scribe should faithfully reconstruct what was taught in the lecture so that a student can rely on it while preparing for a reading-based or closed-notes exam. 
+Include the following elements only when they appear in the provided context: 
+• Definitions and notation 
+• Assumptions and conditions 
+• Statements of theorems or formal results 
+• Proofs or proof sketches 
+• Mathematical derivations 
+• Worked examples with intermediate steps 
+Organize the scribe clearly using appropriate sections and headings so that the logical flow of the lecture is preserved and concepts can be easily reviewed for revision. 
+Maintain a formal and precise academic tone suitable for exam reference material. 
+Do not invent new material, do not simplify or reinterpret concepts, and do not include explanations or examples that are not explicitly present in the provided context.

@@ -1,0 +1,357 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{setspace}
+
+\setstretch{1.2}
+
+\title{CSE 400 – Fundamentals of Probability in Computing\\
+Tutorial 2 – Formal Scribe}
+
+\author{School of Engineering and Applied Science (SEAS), Ahmedabad University}
+\date{Date: February 20, 2026}
+
+\begin{document}
+
+\maketitle
+
+\section*{1. Random Point on a Line Segment}
+
+\textbf{Problem}
+
+A point is chosen at random on a line segment of length $L$. Determine the probability that the ratio of the shorter segment to the longer segment is less than $1/4$.
+
+\textbf{Interpretation}
+
+Let the point be chosen at a distance $x$ from one end such that
+
+\[
+0<x<L
+\]
+
+This divides the segment into two parts:
+
+Segment 1: $x$
+
+Segment 2: $L-x$
+
+Define the ratio
+
+\[
+R=\frac{\min(x,L-x)}{\max(x,L-x)}
+\]
+
+We require
+
+\[
+R<\frac{1}{4}
+\]
+
+\textbf{Case Analysis}
+
+Case 1: $x \le \frac{L}{2}$
+
+Shorter segment = $x$
+
+Longer segment = $L-x$
+
+\[
+\frac{x}{L-x}<\frac{1}{4}
+\]
+
+\[
+4x<L-x
+\]
+
+\[
+5x<L
+\]
+
+\[
+x<\frac{L}{5}
+\]
+
+Case 2: $x>\frac{L}{2}$
+
+Shorter segment = $L-x$
+
+Longer segment = $x$
+
+\[
+\frac{L-x}{x}<\frac{1}{4}
+\]
+
+\[
+4L-4x<x
+\]
+
+\[
+5x>4L
+\]
+
+\[
+x>\frac{4L}{5}
+\]
+
+\textbf{Valid Region}
+
+\[
+(0,\frac{L}{5}) \cup (\frac{4L}{5},L)
+\]
+
+Total valid length
+
+\[
+\frac{L}{5}+\frac{L}{5}=\frac{2L}{5}
+\]
+
+Since the point is uniformly distributed over length $L$,
+
+\[
+P=\frac{2L/5}{L}=\frac{2}{5}
+\]
+
+\section*{2. Classification of Image Pixels Using Normal Distributions}
+
+Given
+
+White region $W$
+
+\[
+X|W \sim N(4,4)
+\]
+
+\[
+\sigma_1=2
+\]
+
+Black region $B$
+
+\[
+X|B \sim N(6,9)
+\]
+
+\[
+\sigma_2=3
+\]
+
+Prior probabilities
+
+\[
+P(B)=\alpha
+\]
+
+\[
+P(W)=1-\alpha
+\]
+
+Observation
+
+\[
+X=5
+\]
+
+The probability of error is the same regardless of classification.
+
+Thus
+
+\[
+P(B|X=5)=P(W|X=5)=\frac{1}{2}
+\]
+
+\textbf{Using Bayes' Theorem}
+
+\[
+P(B|X=5)=
+\frac{\alpha f(5|B)}{\alpha f(5|B)+(1-\alpha)f(5|W)}
+\]
+
+\textbf{Normal density}
+
+\[
+f(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+\]
+
+Evaluate densities
+
+\[
+f(5|B)=\frac{1}{3\sqrt{2\pi}}e^{-1/18}
+\]
+
+\[
+f(5|W)=\frac{1}{2\sqrt{2\pi}}e^{-1/8}
+\]
+
+After simplifying
+
+\[
+\alpha \approx 0.38
+\]
+
+\section*{3. Optimal Location of a Fire Station}
+
+\textbf{(a) Uniform Fire Locations}
+
+\[
+X\sim Uniform(0,A)
+\]
+
+PDF
+
+\[
+f_X(x)=\frac{1}{A}, \quad 0\le x\le A
+\]
+
+Goal
+
+\[
+\min_a E[|X-a|]
+\]
+
+Expected Value
+
+\[
+E[|X-a|]=
+\int_0^a (a-x)\frac{1}{A}dx
++
+\int_a^A (x-a)\frac{1}{A}dx
+\]
+
+After evaluation
+
+\[
+E[|X-a|]=\frac{2a^2-2aA+A^2}{2A}
+\]
+
+Optimization
+
+\[
+\frac{d}{da}=
+\frac{1}{2A}(4a-2A)
+\]
+
+Set derivative to zero
+
+\[
+4a-2A=0
+\]
+
+\[
+a=\frac{A}{2}
+\]
+
+Thus the fire station should be located at the midpoint.
+
+\textbf{(b) Exponential Fire Locations}
+
+\[
+X\sim Exponential(\lambda)
+\]
+
+\[
+f_X(x)=\lambda e^{-\lambda x}
+\]
+
+Expected value
+
+\[
+E[|X-a|]=
+\int_0^a (a-x)\lambda e^{-\lambda x}dx
++
+\int_a^\infty (x-a)\lambda e^{-\lambda x}dx
+\]
+
+Derivative
+
+\[
+\frac{d}{da}E[|X-a|]=1-2e^{-\lambda a}
+\]
+
+Set to zero
+
+\[
+1-2e^{-\lambda a}=0
+\]
+
+\[
+e^{-\lambda a}=\frac{1}{2}
+\]
+
+\[
+a=\frac{\ln 2}{\lambda}
+\]
+
+\section*{4. Lifetime of Mixed Battery Types}
+
+Two battery types exist
+
+\[
+T=i, i=1,2
+\]
+
+\[
+X|T=i \sim Exponential(\lambda_i)
+\]
+
+\[
+P(T=i)=p_i
+\]
+
+Goal
+
+\[
+P(X>t+s|X>t)
+\]
+
+Law of Total Probability
+
+\[
+P(X>t)=p_1e^{-\lambda_1 t}+p_2e^{-\lambda_2 t}
+\]
+
+\[
+P(X>t+s)=p_1e^{-\lambda_1(t+s)}+p_2e^{-\lambda_2(t+s)}
+\]
+
+Conditional Probability
+
+\[
+P(X>t+s|X>t)=
+\frac{P(X>t+s)}{P(X>t)}
+\]
+
+\section*{5. Conditional Distribution of Poisson Variables}
+
+Let
+
+\[
+X\sim Poisson(\lambda_1)
+\]
+
+\[
+Y\sim Poisson(\lambda_2)
+\]
+
+independent.
+
+Goal
+
+\[
+P(X=k|X+Y=n)
+\]
+
+After simplification
+
+\[
+P(X=k|X+Y=n)
+=
+\binom{n}{k}
+\left(\frac{\lambda_1}{\lambda_1+\lambda_2}\right)^k
+\left(\frac{\lambda_2}{\lambda_1+\lambda_2}\right)^{n-k}
+\]
+
+This is a Binomial distribution.
+
+\end{document}
+```

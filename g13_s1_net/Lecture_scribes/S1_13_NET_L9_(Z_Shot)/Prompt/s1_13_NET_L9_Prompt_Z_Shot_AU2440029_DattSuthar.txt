@@ -1,0 +1,14 @@
+Create a formal academic lecture scribe based strictly on the attached lecture slides and relevant textbook material. The scribe must serve as reliable reference material for a closed-notes examination, therefore it must prioritize correctness, precision, and strict faithfulness to the provided source material rather than creative explanation.
+Content Requirements:
+1. Include all definitions, symbols, and mathematical notations introduced in the lecture.
+2. Clearly state all assumptions, propositions, theorems, or formal results exactly as presented in the lecture material.
+3. Reconstruct all proofs, derivations, and worked examples step by step whenever they appear in the provided context.
+4. Do not omit intermediate steps that are necessary to understand the reasoning shown in the lecture.
+Restrictions:
+1. Do not introduce new examples, explanations, or interpretations that are not present in the provided material.
+2. Do not simplify concepts or provide intuitive explanations beyond what is explicitly given in the lecture.
+3. If a concept, example, or derivation is not included in the context, do not generate it.
+Structure:
+1. Organize the scribe following the same logical sequence as the lecture.
+2. Use clear section headings and subheadings to maintain the conceptual flow of the lecture.
+3. Ensure the final document can be used directly by a student for accurate revision of the lecture content.

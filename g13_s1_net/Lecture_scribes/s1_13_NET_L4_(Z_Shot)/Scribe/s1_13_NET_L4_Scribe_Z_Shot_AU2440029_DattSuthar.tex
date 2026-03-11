@@ -1,0 +1,538 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{setspace}
+\usepackage{titlesec}
+
+\setstretch{1.2}
+
+\title{CSE400 – Fundamentals of Probability in Computing\\
+Lecture 4: Joint Probability and Conditional Probability}
+\author{Instructor: Dhaval Patel, PhD}
+\date{Date: January 15, 2026}
+
+\begin{document}
+
+\maketitle
+
+\section*{Lecture - 4}
+
+\section*{1. Engineering Applications of Probability}
+
+Examples of engineering systems where probability is applied include:
+
+\textbf{Speech Recognition System}
+
+A vocabulary such as Hello, Yes, No, Bye can be represented using waveform templates. Different speakers (male, female, child) produce different waveform patterns for the same word.
+
+\textbf{Radar System}
+
+Radar signals are transmitted and reflected from objects such as aircraft. The received signal is processed to determine object detection.
+
+\textbf{Communication Network}
+
+Data is transmitted from a source to a destination through multiple network nodes and devices.
+
+\section*{2. Introduction to Probability Theory}
+
+\subsection*{2.1 Experiments, Sample Space, and Events}
+
+\textbf{Definition: Experiment (E)}
+
+An experiment is a procedure that produces some result.
+
+Example:
+
+Tossing a coin five times $E_5$.
+
+\textbf{Definition: Outcome ($\xi$)}
+
+An outcome is a possible result of an experiment.
+
+Example:
+
+One outcome of $E_5$:
+
+$\xi_1 = HHTHT$
+
+\textbf{Definition: Event}
+
+An event is a set of outcomes of an experiment.
+
+Example:
+
+Let event $C$ in experiment $E_5$ be:
+
+$C = \{$all outcomes consisting of an even number of heads$\}$
+
+\textbf{Definition: Sample Space (S)}
+
+The sample space is the collection or set of all possible distinct outcomes of an experiment.
+
+These outcomes are:
+
+\textbf{Mutually Exclusive}
+
+Example: In a coin flip, you can obtain heads or tails, but not both.
+
+\textbf{Collectively Exhaustive}
+
+All possible outcomes are included in the sample space.
+
+Example: Flip a coin.
+
+\subsection*{Properties of Sample Space}
+
+$S$ is the universal set of outcomes of an experiment.
+
+The sample space can be:
+
+Discrete
+
+Countably infinite
+
+Continuous
+
+\subsection*{Examples of Experiments}
+
+Flipping a fair coin once
+
+Rolling a cubical die with numbered faces
+
+Rolling two dice
+
+Flipping a coin until a tails occurs
+
+Random number generator with interval $[0,1]$
+
+\section*{3. Axioms of Probability}
+
+\textbf{Definition: Probability}
+
+Probability is a measure of the likelihood of events or a function of an event that produces a numerical quantity measuring the likelihood of that event.
+
+\textbf{Axioms}
+
+The following statements are taken as self-evident and require no proof.
+
+For any event $A$:
+
+\[
+0 \le Pr(A) \le 1
+\]
+
+If $S$ is the sample space:
+
+\[
+Pr(S) = 1
+\]
+
+If $A$ and $B$ are mutually exclusive $(A \cap B = \emptyset)$:
+
+\[
+Pr(A \cup B) = Pr(A) + Pr(B)
+\]
+
+For mutually exclusive sets $A_i$:
+
+\[
+Pr\left(\bigcup_{i=1}^{\infty} A_i \right) =
+\sum_{i=1}^{\infty} Pr(A_i)
+\]
+
+\section*{4. Corollary from Probability Axioms}
+
+Let $A$ be the null event for all values of $i$ greater than $n$.
+
+\textbf{Corollary 2.1}
+
+For $M$ mutually exclusive events:
+
+\[
+Pr\left(\bigcup_{i=1}^{M} A_i \right) =
+\sum_{i=1}^{M} Pr(A_i)
+\]
+
+Axiom 3 is equivalent to Corollary 2.1 when the sample space is finite.
+
+The generality of Axiom 3 is necessary when the sample space contains infinitely many points.
+
+\section*{5. Propositions from Probability Axioms}
+
+\textbf{Proposition 2.1}
+
+\[
+Pr(A^c) = 1 - Pr(A)
+\]
+
+\textbf{Proposition 2.2}
+
+If $A \subset B$:
+
+\[
+Pr(A) \le Pr(B)
+\]
+
+\textbf{Proposition 2.3}
+
+For any sets $A$ and $B$:
+
+\[
+Pr(A \cup B) = Pr(A) + Pr(B) - Pr(A \cap B)
+\]
+
+\textbf{Proposition 2.4 (Inclusion–Exclusion Principle)}
+
+\[
+Pr(A_1 \cup A_2 \cup ... \cup A_M)
+=
+\sum_{i=1}^{M} Pr(A_i)
+-
+\sum_{i_1<i_2} Pr(A_{i_1}A_{i_2})
++ ... +
+(-1)^{M+1} Pr(A_1A_2...A_M)
+\]
+
+\section*{6. Assigning Probabilities}
+
+\textbf{Classical Approach}
+
+Example 2.6
+
+Coin flipping experiment:
+
+Compute
+
+$Pr(H), Pr(T)$
+
+Example 2.7
+
+Dice rolling experiment:
+
+Compute
+
+$Pr(even\ number\ is\ rolled)$
+
+Example 2.8
+
+Two dice are rolled.
+
+Let event $A$:
+
+Sum of the two dice equals five.
+
+Compute:
+
+$Pr(A)$
+
+\textbf{Relative Frequency Approach}
+
+Example: Dice experiment where event $A$ = sum of two dice equals five.
+
+Simulation results:
+
+\begin{center}
+\begin{tabular}{c|cccccccccc}
+n & 1000 & 2000 & 3000 & 4000 & 5000 & 6000 & 7000 & 8000 & 9000 & 10000 \\
+\hline
+$n_A$ & 96 & 200 & 314 & 408 & 521 & 630 & 751 & 859 & 970 & 1095 \\
+$n_A/n$ & 0.096 & 0.100 & 0.105 & 0.102 & 0.104 & 0.105 & 0.107 & 0.107 & 0.108 & 0.110
+\end{tabular}
+\end{center}
+
+\textbf{Inference}
+
+To obtain the exact probability of an event, the experiment must be repeated infinitely many times.
+
+Many random phenomena of interest are not repeatable.
+
+\section*{7. Joint Probability}
+
+\textbf{Motivation}
+
+Events are not always mutually exclusive.
+
+We are interested in the probability of the intersection of events $A$ and $B$.
+
+\textbf{Notation}
+
+Joint probability is denoted as:
+
+\[
+Pr(A,B) \quad \text{or} \quad Pr(A \cap B)
+\]
+
+Multiple Events
+
+For events $A_1, A_2, ..., A_M$:
+
+\[
+Pr(A_1, A_2, ..., A_M)
+\]
+
+\section*{8. Example 1: Card Deck}
+
+Consider a deck of 52 playing cards.
+
+Define events:
+
+$A$: Red card selected
+
+$B$: Number card selected (Ace counted as number)
+
+$C$: Heart card selected
+
+Find:
+
+$Pr(A), Pr(B), Pr(C), Pr(A,B), Pr(A,C), Pr(B,C)$
+
+Solution
+
+Individual Probabilities
+
+\[
+Pr(A) = \frac{26}{52} = \frac{1}{2}
+\]
+
+\[
+Pr(B) = \frac{40}{52} = \frac{5}{26}
+\]
+
+\[
+Pr(C) = \frac{13}{52} = \frac{1}{4}
+\]
+
+Joint Probabilities
+
+\[
+Pr(A,B) = \frac{20}{52} = \frac{5}{13}
+\]
+
+\[
+Pr(A,C) = \frac{13}{52} = \frac{1}{4}
+\]
+
+\[
+Pr(B,C) = \frac{10}{52}
+\]
+
+\section*{9. Example 2: Costume Party}
+
+Alex has the following clothing:
+
+Tops:
+
+3 white T-shirts
+
+1 radioactive green cape
+
+Bottoms:
+
+2 flannel dinosaur pajama pants
+
+4 polka-dot boxer shorts
+
+Step 1: Analyze Tops
+
+Total tops:
+
+\[
+3+1=4
+\]
+
+\[
+Pr(Cape)=\frac{1}{4}
+\]
+
+Step 2: Analyze Bottoms
+
+Total bottoms:
+
+\[
+2+4=6
+\]
+
+\[
+Pr(Boxers)=\frac{4}{6}=\frac{2}{3}
+\]
+
+Step 3: Joint Probability
+
+\[
+Pr(Cape \cap Boxers)=Pr(Cape)\times Pr(Boxers)
+\]
+
+\[
+=\frac{1}{4}\times\frac{4}{6}=\frac{1}{6}
+\]
+
+Correct Option: C
+
+\section*{10. Conditional Probability}
+
+\textbf{Motivation}
+
+The occurrence of one event may depend on another event.
+
+\textbf{Definition}
+
+The probability of event $A$ given event $B$:
+
+\[
+Pr(A|B)=\frac{Pr(A,B)}{Pr(B)}
+\]
+
+where
+
+\[
+Pr(B)>0
+\]
+
+\textbf{Product Rule}
+
+\[
+Pr(A,B)=Pr(A|B)Pr(B)=Pr(B|A)Pr(A)
+\]
+
+\section*{11. Example 3: Cards Without Replacement}
+
+Two cards are selected without replacement.
+
+Define:
+
+$A$: First card is a spade
+
+$B$: Second card is a spade
+
+Find:
+
+$Pr(B|A)$
+
+Initial State
+
+Total cards = 52
+
+Spades = 13
+
+After Event $A$
+
+One spade removed.
+
+Remaining:
+
+Total cards = $52-1=51$
+
+Spades = $13-1=12$
+
+Calculation
+
+\[
+Pr(B|A)=\frac{12}{51}
+\]
+
+\section*{12. Example 4: Game of Poker}
+
+Five cards are dealt.
+
+A flush means all cards are from the same suit.
+
+Part 1: Flush in Spades
+
+\[
+P(1st\ spade)=\frac{13}{52}
+\]
+
+\[
+P(2nd\ spade)=\frac{12}{51}
+\]
+
+\[
+P(3rd\ spade)=\frac{11}{50}
+\]
+
+\[
+P(4th\ spade)=\frac{10}{49}
+\]
+
+\[
+P(5th\ spade)=\frac{9}{48}
+\]
+
+\[
+P(Spade\ Flush)=
+\frac{13}{52}\cdot
+\frac{12}{51}\cdot
+\frac{11}{50}\cdot
+\frac{10}{49}\cdot
+\frac{9}{48}
+\]
+
+Part 2: Any Flush
+
+There are four suits:
+
+Spades, Hearts, Diamonds, Clubs.
+
+Since events are mutually exclusive:
+
+\[
+P(Any\ Flush)=4\times P(Spade\ Flush)
+\]
+
+\section*{13. Example 5: The Missing Key}
+
+Bob is 80\% certain the key is in his jacket.
+
+Left pocket:
+
+\[
+P(L)=0.4
+\]
+
+Right pocket:
+
+\[
+P(R)=0.4
+\]
+
+In jacket:
+
+\[
+P(K)=0.8
+\]
+
+Goal:
+
+\[
+P(R|L^c)
+\]
+
+Probability that the key is in the right pocket given it is not in the left pocket.
+
+Calculation
+
+\[
+P(R|L^c)=\frac{P(R \cap L^c)}{P(L^c)}
+\]
+
+Since $R$ implies $L^c$:
+
+\[
+P(R \cap L^c)=P(R)
+\]
+
+\[
+P(L^c)=1-P(L)
+\]
+
+Therefore
+
+\[
+P(R|L^c)=\frac{0.4}{1-0.4}=\frac{0.4}{0.6}=\frac{2}{3}
+\]
+
+Correct Option: C
+
+\end{document}
+```

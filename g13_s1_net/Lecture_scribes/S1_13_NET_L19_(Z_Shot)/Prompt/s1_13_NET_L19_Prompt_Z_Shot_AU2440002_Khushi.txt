@@ -1,0 +1,35 @@
+Create a lecture scribe that will be used as a reference to a good preparation of the exams.
+
+Take the given context (lecture material and other material in the textbook). The content of the output should be very strict to the material presented. Introduce no new explanations, examples, results or interpretations not explicitly set forth in context.
+
+Content Requirements
+
+Included should be that material that is present in the given context like:
+
+1.	 Definitions and notation 
+2.	 Assumptions and declared conditions. 
+3.	 Formulas, outcomes, and theories. 
+4.	 Proofs or derivations shown 
+5.	 The worked examples and solved problems. 
+6.	 In between steps depicted in solutions. 
+7.	 Rational progression among ideas as they exist. 
+
+Scope Constraints
+
+1.	Only given lecture and textbook materials. 
+2.	No additional issues, alternative solutions, intuition or commentary are to be added unless indicated.
+3.	Not to follow the steps that are in the source material.
+4.	Be consistent in the notation and terminology.
+
+Structural Requirements
+
+1.	Ascertain the scribe in sequence of presentation in order of appearance using systematic parts like:
+2.	Title
+3.	Definitions and Notation
+4.	Theorems or Results
+5.	Proofs or Derivations
+6.	Solved Problems or Worked Examples.
+7.	Maintain the initial order of subjects.
+
+Objective
+Create a faithful, structured lecture scribe that would allow the correct revision of definitions and derivations and solved problems by use of the given document alone.

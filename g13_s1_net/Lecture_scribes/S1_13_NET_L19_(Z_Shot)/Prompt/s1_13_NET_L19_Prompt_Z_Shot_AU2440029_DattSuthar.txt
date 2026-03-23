@@ -1,0 +1,25 @@
+Generate a complete lecture scribe intended to be used as authoritative reference material for exam preparation in a closed-notes setting.
+
+The scribe must be constructed exclusively from the provided lecture slides and relevant textbook material. All content in the output must be directly traceable to this context, and no additional explanations, assumptions, examples, or interpretations may be introduced.
+
+The objective of the scribe is to accurately reproduce the lecture content in a form that enables precise revision of all concepts, results, and problem-solving procedures.
+
+The lecture scribe should:
+
+• Preserve the original structure and ordering of topics as presented in the lecture.
+• Include all definitions, notations, and formal terminology exactly as introduced.
+• Clearly state all assumptions, conditions, and constraints where applicable.
+• Present all theorems, propositions, and formal results in their complete form.
+• Reconstruct all proofs and derivations step by step, including all intermediate steps shown in the lecture.
+• Include all worked examples and solved problems with full procedural detail as given in the lecture material.
+• Maintain strict mathematical correctness and consistency throughout.
+• Use well-defined sections and headings to reflect the logical flow of the lecture content.
+
+The lecture scribe must not:
+
+• Add intuitive explanations, commentary, or simplifications beyond what is explicitly stated in the provided material.
+• Introduce new examples, alternative methods, or additional results.
+• Omit intermediate reasoning steps that are present in the lecture.
+• Alter the logical sequence or organization of the lecture content.
+
+The final output must function as a faithful reconstruction of the lecture, suitable for direct use in exam revision without reliance on external sources.

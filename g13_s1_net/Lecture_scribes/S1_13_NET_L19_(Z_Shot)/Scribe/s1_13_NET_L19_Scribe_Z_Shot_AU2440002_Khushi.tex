@@ -1,0 +1,219 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb}
+
+\title{Lecture Scribe: Joint Distribution of N Random Variables}
+\author{CSE400 -- Lecture 19}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Definitions and Notation}
+
+\subsection{Joint Distribution of N Random Variables}
+For random variables $X_1, X_2, \dots, X_N$, the vector form is:
+\[
+\mathbf{X} =
+\begin{bmatrix}
+X_1 \\
+X_2 \\
+\vdots \\
+X_N
+\end{bmatrix}
+\]
+
+The joint distribution describes the probability behavior of all variables together. It can be represented using:
+\begin{itemize}
+\item Joint PMF
+\item Joint PDF
+\item Joint CDF
+\end{itemize}
+
+\subsection{Joint PMF}
+\[
+P_{X_1, \dots, X_N}(x_1, \dots, x_N)
+= P(X_1 = x_1, \dots, X_N = x_N)
+\]
+
+\subsection{Joint CDF}
+\[
+F_{X_1, \dots, X_N}(x_1, \dots, x_N)
+= P(X_1 \le x_1, \dots, X_N \le x_N)
+\]
+
+\subsection{Joint PDF}
+\[
+f_{X_1, \dots, X_N}(x_1, \dots, x_N)
+= \frac{\partial^N F_{X_1, \dots, X_N}}{\partial x_1 \cdots \partial x_N}
+\]
+
+\section{Jointly Gaussian Random Variables}
+
+\subsection{Joint Gaussian PDF}
+\[
+\begin{aligned}
+f_{XY}(x,y) &=
+\frac{1}{2\pi \sigma_x \sigma_y \sqrt{1-\rho_{XY}^2}} \\
+&\quad \times \exp \left(
+-\frac{1}{2(1-\rho_{XY}^2)}
+\left[
+\left(\frac{x-\mu_x}{\sigma_x}\right)^2 \right.\right. \\
+&\qquad \left.
+- 2\rho_{XY}\left(\frac{x-\mu_x}{\sigma_x}\right)
+\left(\frac{y-\mu_y}{\sigma_y}\right)
++ \left(\frac{y-\mu_y}{\sigma_y}\right)^2
+\right] \Bigg)
+\end{aligned}
+\]
+
+\subsection{Correlation Coefficient}
+\[
+\rho_{XY} = \frac{\text{cov}(X,Y)}{\sigma_X \sigma_Y}
+\]
+
+\section{Marginal Distributions}
+
+\[
+f_X(x) = \int_{-\infty}^{\infty} f_{X,Y}(x,y)\, dy
+\]
+\[
+f_Y(y) = \int_{-\infty}^{\infty} f_{X,Y}(x,y)\, dx
+\]
+
+\subsection{Key Property}
+\[
+X \sim \mathcal{N}(\mu_X, \sigma_X^2), \quad
+Y \sim \mathcal{N}(\mu_Y, \sigma_Y^2)
+\]
+
+\section{Independence of Random Variables}
+
+\[
+f_{X_1, \dots, X_N}(x_1, \dots, x_N)
+= \prod_{i=1}^{N} f_{X_i}(x_i)
+\]
+
+\section{Worked Examples}
+
+\subsection{Example 1: Joint Gaussian}
+
+\textbf{Given:}
+\[
+\mu_X = 2,\quad \sigma_X = 1,\quad \mu_Y = -3,\quad \sigma_Y = 2,\quad \text{cov}(X,Y) = -1
+\]
+
+\subsubsection{(a) Correlation Coefficient}
+\[
+\rho_{XY} = \frac{-1}{(1)(2)} = -\frac{1}{2}
+\]
+
+\subsubsection{(b) Joint PDF}
+\[
+f_{X,Y}(x,y) = \frac{1}{2\pi \sqrt{3}}
+\exp\left(-\frac{2}{3}\left[(x-2)^2 + \frac{(x-2)(y+3)}{2} + \frac{(y+3)^2}{4}\right]\right)
+\]
+
+\subsubsection{(c) Marginal PDFs}
+\[
+f_X(x) = \frac{1}{\sqrt{2\pi}} e^{-\frac{(x-2)^2}{2}}
+\]
+\[
+f_Y(y) = \frac{1}{2\sqrt{2\pi}} e^{-\frac{(y+3)^2}{8}}
+\]
+
+\subsubsection{(d) Probability}
+\[
+Z = \frac{X-2}{1}
+\]
+\[
+P(X < 0) = P(Z < -2) = P(Z > 2) = Q(2)
+\]
+
+\subsection{Example 2: Uniform 3D Vector}
+
+\[
+f_{X_1,X_2,X_3} =
+\begin{cases}
+C, & |x_i| \le 1 \\
+0, & \text{otherwise}
+\end{cases}
+\]
+
+\subsubsection{(a) Constant}
+\[
+C(2)(2)(2) = 1 \Rightarrow C = \frac{1}{8}
+\]
+
+\subsubsection{(b) Marginal}
+\[
+f_{X_1,X_2} = \frac{1}{4}
+\]
+
+\subsubsection{(c) Marginal}
+\[
+f_{X_1} = \frac{1}{2}
+\]
+
+\subsubsection{(d) Conditional}
+\[
+f_{X_1|X_2,X_3} = \frac{1/8}{1/4} = \frac{1}{2}
+\]
+
+\subsubsection{(e) Conditional}
+\[
+f_{X_1|X_2} = \frac{1/4}{1/2} = \frac{1}{2}
+\]
+
+\subsubsection{(f) Independence}
+\[
+\frac{1}{8} = \frac{1}{2} \cdot \frac{1}{2} \cdot \frac{1}{2}
+\]
+
+\subsection{Example 3: Trivariate Distribution}
+
+\[
+f_{X,Y,Z} =
+\begin{cases}
+K e^{-(ax+by+cz)}, & x,y,z > 0 \\
+0, & \text{otherwise}
+\end{cases}
+\]
+
+\subsubsection{(a) Constant}
+\[
+K \frac{1}{a}\frac{1}{b}\frac{1}{c} = 1 \Rightarrow K = abc
+\]
+
+\subsubsection{(b) Marginal}
+\[
+f_{X,Y} = abe^{-(ax+by)}
+\]
+
+\subsubsection{(c) Marginal}
+\[
+f_X = ae^{-ax}
+\]
+
+\subsubsection{(d) Independence}
+\[
+abc e^{-(ax+by+cz)} = (ae^{-ax})(be^{-by})(ce^{-cz})
+\]
+
+\section{Application: Large MIMO System}
+
+\subsection{System Setup}
+$M$: Transmit antennas \\
+$N$: Receive antennas
+
+\subsection{Channel Matrix}
+\[
+H =
+\begin{bmatrix}
+h_{11} & \cdots & h_{1N} \\
+\vdots & \ddots & \vdots \\
+h_{M1} & \cdots & h_{MN}
+\end{bmatrix}
+\]
+
+\end{document}

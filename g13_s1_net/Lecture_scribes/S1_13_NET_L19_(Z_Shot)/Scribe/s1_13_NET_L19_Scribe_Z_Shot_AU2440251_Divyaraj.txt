@@ -1,0 +1,285 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb}
+
+\begin{document}
+
+\begin{center}
+    \textbf{\Large CSE400 -- Fundamentals of Probability in Computing} \\[5pt]
+    \textbf{Name: Divyaraj Vaghela} \\ 
+    \textbf{Enrollment: AU2440251}
+\end{center}
+
+\section{Joint Distribution of N Random Variables}
+
+\subsection{Definition and Representation}
+
+\textbf{Definition}
+
+For random variables $X_1, X_2, \ldots, X_N$, the vector form is:
+
+\[
+\mathbf{X} =
+\begin{bmatrix}
+X_1 \\
+X_2 \\
+\vdots \\
+X_N
+\end{bmatrix}
+\]
+
+\textbf{Key Statements}
+\begin{itemize}
+    \item The joint distribution describes the probability behavior of all variables together.
+    \item It can be represented using:
+    \begin{itemize}
+        \item Joint PMF
+        \item Joint PDF
+        \item Joint CDF
+    \end{itemize}
+\end{itemize}
+
+\section{Joint Gaussian Random Variables}
+
+\subsection{Joint Gaussian PDF (Two Variables)}
+
+For two variables $X$ and $Y$:
+
+\[
+f_{X,Y}(x,y) =
+\frac{1}{2\pi \sigma_X \sigma_Y \sqrt{1-\rho^2}}
+\exp \left(
+-\frac{1}{2(1-\rho^2)}
+\left[
+\left(\frac{x-\mu_X}{\sigma_X}\right)^2
++
+\left(\frac{y-\mu_Y}{\sigma_Y}\right)^2
+-2\rho
+\left(\frac{x-\mu_X}{\sigma_X}\right)
+\left(\frac{y-\mu_Y}{\sigma_Y}\right)
+\right]
+\right)
+\]
+
+Where:
+\begin{itemize}
+    \item $\mu_X, \mu_Y$: means
+    \item $\sigma_X, \sigma_Y$: standard deviations
+    \item $\rho$: Pearson correlation coefficient
+\end{itemize}
+
+\subsection{General Formula}
+
+\[
+f_{XY}(x,y) =
+\frac{
+\exp \left(
+-\frac{1}{2(1-\rho_{XY}^2)}
+\left[
+\left(\frac{x-\mu_X}{\sigma_X}\right)^2
+-2\rho_{XY}\frac{(x-\mu_X)(y-\mu_Y)}{\sigma_X \sigma_Y}
++
+\left(\frac{y-\mu_Y}{\sigma_Y}\right)^2
+\right]
+\right)
+}{
+2\pi \sigma_X \sigma_Y \sqrt{1-\rho_{XY}^2}
+}
+\]
+
+\section{Example 1: Joint Gaussian Variables}
+
+\subsection{Given}
+
+Two random variables $X$ and $Y$ are jointly Gaussian with:
+
+\[
+\mu_X = 2, \quad \sigma_X^2 = 1
+\]
+\[
+\mu_Y = -3, \quad \sigma_Y^2 = 4
+\]
+\[
+\text{cov}(X,Y) = -1
+\]
+
+\subsection{Problem Statement}
+
+Find:
+\begin{itemize}
+    \item[(a)] Joint PDF $f_{XY}(x,y)$
+    \item[(b)] Marginal PDFs $f_X(x)$ and $f_Y(y)$
+    \item[(c)] $\Pr(X < 0)$ in terms of Q-function
+\end{itemize}
+
+\section{Solution (a): Joint PDF Construction}
+
+\subsection{Step 1: Correlation Coefficient}
+
+\[
+\rho_{XY} = \frac{\text{cov}(X,Y)}{\sigma_X \sigma_Y}
+\]
+
+From given variances:
+
+\[
+\sigma_X = \sqrt{1} = 1, \quad \sigma_Y = \sqrt{4} = 2
+\]
+
+\[
+\rho_{XY} = \frac{-1}{(1)(2)} = -\frac{1}{2}
+\]
+
+\subsection{Step 2: Substitute into General Formula}
+
+\[
+\mu_X = 2, \quad \sigma_X = 1, \quad \mu_Y = -3, \quad \sigma_Y = 2, \quad \rho_{XY} = -0.5
+\]
+
+\subsection{Final Joint PDF}
+
+\[
+f_{XY}(x,y) =
+\frac{1}{2\pi \sqrt{3}}
+\exp \left\{
+-\frac{2}{3}
+\left[
+(x-2)^2
++
+\frac{(x-2)(y+3)}{2}
++
+\frac{(y+3)^2}{4}
+\right]
+\right\}
+\]
+
+\section{Solution (b): Marginal PDFs}
+
+\subsection{Definition}
+
+Marginal PDFs are obtained by integrating the joint PDF:
+
+\[
+f_X(x) = \int_{-\infty}^{\infty} f_{XY}(x,y)\, dy
+\]
+
+\[
+f_Y(y) = \int_{-\infty}^{\infty} f_{XY}(x,y)\, dx
+\]
+
+\subsection{Key Property}
+
+Because $X$ and $Y$ are jointly Gaussian:
+
+\[
+X \sim \mathcal{N}(\mu_X, \sigma_X^2), \quad
+Y \sim \mathcal{N}(\mu_Y, \sigma_Y^2)
+\]
+
+\subsection{Final Marginal PDFs}
+
+\[
+f_X(x) =
+\frac{1}{\sqrt{2\pi}}
+\exp \left(-\frac{(x-2)^2}{2} \right)
+\]
+
+\[
+f_Y(y) =
+\frac{1}{2\sqrt{2\pi}}
+\exp \left(-\frac{(y+3)^2}{8} \right)
+\]
+
+\section{Solution (c): CDF and Standardization}
+
+\subsection{Step 1: Identify the CDF}
+
+\[
+F_X(x) = \Pr(X \le x)
+\]
+
+Thus:
+
+\[
+F_X(0) = \Pr(X < 0)
+\]
+
+\subsection{Step 2: Standardization}
+
+\[
+Z = \frac{X - \mu_X}{\sigma_X}
+\]
+
+Given:
+
+\[
+X \sim \mathcal{N}(2,1)
+\]
+
+\[
+\Pr(X < 0)
+=
+\Pr\left(\frac{X-2}{1} < \frac{0-2}{1}\right)
+=
+\Pr(Z < -2)
+\]
+
+\[
+= \Phi(-2)
+\]
+
+\subsection{Step 3: Symmetry Property}
+
+\[
+\Phi(-x) = 1 - \Phi(x) = \Pr(Z > x)
+\]
+
+Thus:
+
+\[
+\Pr(Z < -2) = \Pr(Z > 2)
+\]
+
+\subsection{Step 4: Q-function Relation}
+
+\[
+Q(x) = \Pr(Z > x)
+\]
+
+\textbf{Final Answer}
+
+\[
+\Pr(X < 0) = Q(2)
+\]
+
+\section{Application: Large MIMO System}
+
+\textbf{System Setup}
+\begin{itemize}
+    \item Wireless communication system
+    \item $M$ transmit antennas
+    \item $N$ receive antennas
+\end{itemize}
+
+This application demonstrates:
+\begin{itemize}
+    \item Joint modeling of multiple random variables
+    \item Use of joint distributions in communication systems
+\end{itemize}
+
+\section{Summary of Key Concepts (From Lecture Flow)}
+
+\begin{itemize}
+    \item Joint distribution of $N$ random variables represented in vector form
+    \item Joint PDF/PMF/CDF describe combined probabilistic behavior
+    \item Joint Gaussian distribution fully characterized by:
+    \begin{itemize}
+        \item Means
+        \item Variances
+        \item Correlation coefficient
+    \end{itemize}
+    \item Marginals of jointly Gaussian variables are Gaussian
+    \item Standardization converts variables to $\mathcal{N}(0,1)$
+    \item Q-function represents tail probabilities
+\end{itemize}
+
+\end{document}

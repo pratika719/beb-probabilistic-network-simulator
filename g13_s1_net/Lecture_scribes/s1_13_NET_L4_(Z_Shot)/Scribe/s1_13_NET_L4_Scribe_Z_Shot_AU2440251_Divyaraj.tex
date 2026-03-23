@@ -1,0 +1,356 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper, margin=1in]{geometry}
+
+\begin{document}
+
+\noindent
+\textbf{\Large CSE400 -- Fundamentals of Probability in Computing}
+
+\vspace{0.3cm}
+
+\noindent
+\textbf{\large Lecture 4: Joint Probability and Conditional Probability}
+
+\vspace{0.3cm}
+
+\noindent
+\textbf{Instructor:} Dhaval Patel, PhD
+
+\noindent
+\textbf{Date:} January 15, 2026
+
+\vspace{0.3cm}
+
+\noindent
+
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
+
+\section*{1. Introduction}
+
+\subsection*{1.1 Course Motivation and Applications}
+
+\textbf{Engineering Applications}
+
+\vspace{0.3cm}
+
+The lecture presents engineering applications where probabilistic reasoning is used:
+
+\begin{enumerate}
+    \item Speech Recognition System
+    \begin{itemize}
+        \item The system uses vocabulary templates such as:
+        \begin{itemize}
+            \item Hello
+            \item Yes
+            \item No
+            \item Bye
+        \end{itemize}
+    \end{itemize}
+\end{enumerate}
+
+\begin{enumerate}
+    \setcounter{enumi}{1}
+
+    \item Radar System
+    \begin{itemize}
+        \item Radar systems detect objects such as aircraft using transmitted and received signals.
+    \end{itemize}
+
+    \item Communication Network
+    \begin{itemize}
+        \item Communication networks involve transmission of data from source nodes to destination nodes through interconnected systems.
+    \end{itemize}
+\end{enumerate}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
+
+\section*{2. Lecture Outline}
+
+The lecture includes the following major components:
+
+\subsection*{2.1 Introduction to Probability Theory}
+
+\begin{itemize}
+    \item Experiments, Sample Space, and Events
+    \item Axioms of Probability
+    \item Corollaries and Propositions from Probability Axioms
+    \item How to Assign Probability: Classical and Relative Frequency Approaches
+\end{itemize}
+
+\subsection*{2.2 Joint Probability}
+
+\begin{itemize}
+    \item Motivation, Notation, and Concepts of Joint Probability
+    \item Example 1: Card Deck Example
+    \item Example 2: Costume Party Example
+\end{itemize}
+\subsection*{2.3 Conditional Probability}
+
+\begin{itemize}
+    \item Motivation, Notation, and Concepts of Conditional Probability
+    \item Example 3: Cards Without Replacement
+    \item Example 4: Game of Poker
+    \item Example 5: The Missing Key
+\end{itemize}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
+
+\section*{3. Introduction to Probability Theory}
+
+\subsection*{3.1 Experiments, Sample Space, and Events}
+
+\subsubsection*{3.1.1 Experiment}
+
+\textbf{Definition:}
+
+An \textbf{Experiment (E)} is a procedure we perform that produces some result.
+
+\vspace{0.3cm}
+
+\textbf{Example:}
+
+\begin{itemize}
+    \item Tossing a coin five times
+    \item Denoted as $E_5$
+\end{itemize}
+\subsubsection*{3.1.2 Outcome}
+
+\textbf{Definition:}
+
+An \textbf{Outcome ($\xi$)} is a possible result of an experiment.
+
+\vspace{0.3cm}
+
+\textbf{Example:}
+
+For experiment $E_5$:
+
+\begin{itemize}
+    \item One possible outcome is
+\end{itemize}
+
+\[
+\xi_1 = HHTHT
+\]
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
+
+\subsubsection*{3.1.3 Event}
+
+\textbf{Definition:}
+
+An \textbf{Event (any letter)} is a certain set of outcomes of an experiment.
+
+\vspace{0.3cm}
+
+\textbf{Example:}
+
+Consider event $C$ with experiment $E_5$:
+
+\[
+C = \{\text{all outcomes consisting of an even number of heads}\}
+\]
+\subsection*{3.2 Sample Space}
+
+\subsubsection*{3.2.1 Definition}
+
+The \textbf{Sample Space (S)} is the collection or set of all possible distinct outcomes of an experiment.
+
+\vspace{0.3cm}
+
+The outcomes in the sample space must satisfy:
+
+\begin{enumerate}
+    \item \textbf{Mutually Exclusive}
+    \begin{itemize}
+        \item Two outcomes cannot occur simultaneously.
+        \item Example: In a coin flip, you can get heads or tails but not both.
+    \end{itemize}
+
+    \item \textbf{Collectively Exhaustive}
+    \begin{itemize}
+        \item All possible outcomes must be included.
+        \item Example: In a coin flip, outcomes are only heads or tails.
+    \end{itemize}
+\end{enumerate}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
+
+\subsubsection*{3.2.2 Properties of Sample Space}
+
+\begin{itemize}
+    \item $S$ is the universal set of outcomes of an experiment.
+    \item Sample space can be:
+    \begin{itemize}
+        \item Discrete
+        \item Countably infinite
+        \item Continuous
+    \end{itemize}
+\end{itemize}
+\subsubsection*{3.2.3 Examples of Sample Spaces}
+
+\begin{enumerate}
+    \item Flipping a fair coin once
+    \item Rolling a cubical die with numbered faces
+    \item Rolling two dice
+    \item Flipping a coin until a tail occurs
+    \item Random number generator with interval $[0,1]$
+\end{enumerate}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
+
+\section*{4. Axioms of Probability}
+
+\subsection*{4.1 Probability Definition}
+
+Probability is defined as:
+
+\begin{itemize}
+    \item A measure of the likelihood of various events
+    
+    OR
+    
+    \item A function of an event that produces a numerical quantity measuring the likelihood of that event.
+\end{itemize}
+
+There are many ways to define such a function.
+\subsection*{4.2 Probability Axioms}
+
+The axioms are statements that are taken to be self-evident and require no proof.
+
+\vspace{0.3cm}
+
+\textbf{Axiom 1:}
+
+For any event $A$,
+
+\[
+0 \leq Pr(A) \leq 1
+\]
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
+
+\textbf{Axiom 2:}
+
+If $S$ is the sample space for a given experiment,
+
+\[
+Pr(S) = 1
+\]
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
+
+\textbf{Axiom 3 (Finite Additivity):}
+
+If $A \cap B = \emptyset$,
+
+\[
+Pr(A \cup B) = Pr(A) + Pr(B)
+\]
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
+
+\textbf{Axiom 4 (Countable Additivity):}
+
+For an infinite number of mutually exclusive sets $A_i$,
+
+where
+
+\[
+A_i \cap A_j = \emptyset \quad \text{for all } i \neq j
+\]
+
+Then:
+
+\[
+Pr \left( \bigcup_{i=1}^{\infty} A_i \right) = \sum_{i=1}^{\infty} Pr(A_i)
+\]
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
+
+\section*{5. Corollaries from Probability Axioms}
+
+\textbf{Definition}
+
+Let $A$ be the null event for all values of $i$ greater than $n$.
+\subsection*{Corollary 2.1}
+
+For $M$ finite number of mutually exclusive sets $A_i$,
+
+\[
+A_i \cap A_j = \emptyset \quad \text{for all } i \neq j
+\]
+
+Then:
+
+\[
+Pr \left( \bigcup_{i=1}^{M} A_i \right) = \sum_{i=1}^{M} Pr(A_i)
+\]
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
+
+\textbf{Notes}
+
+\begin{itemize}
+    \item Axiom 3 is equivalent to Corollary 2.1 when the sample space is finite.
+    \item The generality of Axiom 3 is necessary when the sample space contains an infinite number of points.
+\end{itemize}
+\section*{6. Propositions from Probability Axioms}
+
+\subsection*{Proposition 2.1}
+
+For any event $A$,
+
+\[
+Pr(A^c) = 1 - Pr(A)
+\]
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.5cm}
+
+\subsection*{Proposition 2.2}
+
+If $A \subset B$, then:
+
+\[
+Pr(A) \leq Pr(B)
+\]
+\section*{7. Logical Flow of Concepts}
+
+The lecture establishes the following conceptual progression:
+
+\begin{enumerate}
+    \item Define experiments and outcomes
+    \item Construct events as sets of outcomes
+    \item Define the sample space as the universal outcome set
+    \item Introduce probability as a measure over events
+    \item Establish probability axioms
+    \item Derive corollaries and propositions from axioms
+    \item Use these foundations to study joint probability and conditional probability (introduced later in lecture outline)
+\end{enumerate}
+
+
+\end{document}

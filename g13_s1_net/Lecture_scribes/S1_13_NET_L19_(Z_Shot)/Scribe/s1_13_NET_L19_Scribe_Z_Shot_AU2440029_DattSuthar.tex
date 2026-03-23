@@ -1,0 +1,369 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{setspace}
+
+\setstretch{1.2}
+
+\title{CSE400 – Fundamentals of Probability in Computing\\
+Lecture 19: N-Variate Joint PDF/PMF/CDF}
+
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{1. Joint Distribution of N Random Variables}
+
+\subsection*{1.1 Representation of Multiple Random Variables}
+
+\textbf{Definition}
+
+For random variables $X_1, X_2, \dots, X_N$, the vector form is:
+
+\[
+X =
+\begin{bmatrix}
+X_1 \\
+X_2 \\
+\vdots \\
+X_N
+\end{bmatrix}
+\]
+
+The joint distribution describes the probability behavior of all variables together.
+
+It can be represented using:
+
+Joint PMF
+
+Joint PDF
+
+Joint CDF
+
+\section*{2. Jointly Gaussian Random Variables}
+
+\subsection*{2.1 Joint Gaussian PDF (Two Variables)}
+
+For two variables $X$ and $Y$:
+
+\[
+f_{XY}(x,y)=
+\frac{1}{2\pi\sigma_X\sigma_Y\sqrt{1-\rho^2}}
+\exp\left(
+-\frac{1}{2(1-\rho^2)}
+\left[
+\left(\frac{x-\mu_X}{\sigma_X}\right)^2
++
+\left(\frac{y-\mu_Y}{\sigma_Y}\right)^2
+-2\rho
+\left(\frac{x-\mu_X}{\sigma_X}\right)
+\left(\frac{y-\mu_Y}{\sigma_Y}\right)
+\right]
+\right)
+\]
+
+Where:
+
+$\mu_X,\mu_Y$: means
+
+$\sigma_X,\sigma_Y$: standard deviations
+
+$\rho$: Pearson correlation coefficient
+
+\section*{3. Example 1: Jointly Gaussian Variables}
+
+Given
+
+\[
+\mu_X=2,\quad \sigma_X^2=1
+\]
+
+\[
+\mu_Y=-3,\quad \sigma_Y^2=4
+\]
+
+\[
+cov(X,Y)=-1
+\]
+
+\subsection*{(a) Joint PDF Construction}
+
+Step 1: Correlation Coefficient
+
+\[
+\rho_{XY}=\frac{cov(X,Y)}{\sigma_X\sigma_Y}
+\]
+
+\[
+\sigma_X=1,\quad \sigma_Y=2
+\]
+
+\[
+\rho_{XY}=-\frac{1}{2}
+\]
+
+Step 2: Substitute into General Formula
+
+\[
+\mu_X=2,\ \sigma_X=1,\ \mu_Y=-3,\ \sigma_Y=2,\ \rho=-0.5
+\]
+
+Final Joint PDF
+
+\[
+f_{XY}(x,y)=
+\frac{1}{2\pi\sqrt{3}}
+\exp\left(
+-\frac{2}{3}
+\left[
+(x-2)^2
++
+(x-2)(y+3)
++
+\frac{(y+3)^2}{4}
+\right]
+\right)
+\]
+
+\subsection*{(b) Marginal PDFs}
+
+\[
+f_X(x)=\int_{-\infty}^{\infty} f_{XY}(x,y) dy
+\]
+
+\[
+f_Y(y)=\int_{-\infty}^{\infty} f_{XY}(x,y) dx
+\]
+
+Key Property
+
+If $X$ and $Y$ are jointly Gaussian:
+
+\[
+X\sim N(\mu_X,\sigma_X^2),\quad Y\sim N(\mu_Y,\sigma_Y^2)
+\]
+
+Marginal Results
+
+\[
+f_X(x)=\frac{1}{\sqrt{2\pi}} \exp\left(-\frac{(x-2)^2}{2}\right)
+\]
+
+\[
+f_Y(y)=\frac{1}{2\sqrt{2\pi}} \exp\left(-\frac{(y+3)^2}{8}\right)
+\]
+
+\subsection*{(c) Probability $Pr(X<0)$}
+
+Step 1: Identify CDF
+
+\[
+F_X(x)=Pr(X\le x),\quad Pr(X<0)=F_X(0)
+\]
+
+Step 2: Standardization
+
+\[
+Z=\frac{X-\mu_X}{\sigma_X}
+\]
+
+\[
+Pr(X<0)=Pr(Z<-2)
+\]
+
+Step 3: Symmetry Property
+
+\[
+\phi(-x)=1-\phi(x)=Pr(Z>x)
+\]
+
+\[
+Pr(Z<-2)=Pr(Z>2)
+\]
+
+Step 4: Q-Function
+
+\[
+Q(x)=Pr(Z>x)
+\]
+
+Final Answer
+
+\[
+Pr(X<0)=Q(2)
+\]
+
+\section*{4. Application: Large MIMO System}
+
+System Setup
+
+$M$: transmit antennas
+
+$N$: receive antennas
+
+Channel Coefficients
+
+Each path between antenna $i$ and $j$:
+
+$h_{ij}$
+
+Channel Matrix
+
+\[
+H =
+\begin{bmatrix}
+h_{11} & h_{12} & \cdots & h_{1N} \\
+h_{21} & h_{22} & \cdots & h_{2N} \\
+\vdots & \vdots & \ddots & \vdots \\
+h_{M1} & h_{M2} & \cdots & h_{MN}
+\end{bmatrix}_{M\times N}
+\]
+
+\section*{5. Joint PMF}
+
+For discrete random variables:
+
+\[
+P_{X_1,\dots,X_N}(x_1,\dots,x_N)=
+P(X_1=x_1,\dots,X_N=x_N)
+\]
+
+\section*{6. Joint CDF}
+
+\[
+F_{X_1,\dots,X_N}(x_1,\dots,x_N)=
+P(X_1\le x_1,\dots,X_N\le x_N)
+\]
+
+\section*{7. Joint PDF}
+
+\[
+f_{X_1,\dots,X_N}(x_1,\dots,x_N)=
+\frac{\partial^N}{\partial x_1\cdots \partial x_N}
+F_{X_1,\dots,X_N}(x_1,\dots,x_N)
+\]
+
+\section*{8. Independence of Random Variables}
+
+Condition
+
+\[
+X=[X_1,X_2,\dots,X_N]^T
+\]
+
+If independent:
+
+\[
+f_X(x_1,\dots,x_N)=\prod_{i=1}^N f_{X_i}(x_i)
+\]
+
+\section*{9. Example 2: Uniformly Distributed 3D Vector}
+
+Given
+
+\[
+|X_1|\le1,\ |X_2|\le1,\ |X_3|\le1
+\]
+
+\[
+f_{X_1,X_2,X_3}(x_1,x_2,x_3)=
+\begin{cases}
+C, & \text{inside cube} \\
+0, & \text{otherwise}
+\end{cases}
+\]
+
+(a) Find $C$
+
+\[
+C(2)(2)(2)=1 \Rightarrow C=\frac{1}{8}
+\]
+
+(b) Marginal
+
+\[
+f_{X_1,X_2}(x_1,x_2)=\int_{-1}^{1}\frac{1}{8}dx_3=\frac{1}{4}
+\]
+
+(c) Marginal
+
+\[
+f_{X_1}(x_1)=\int_{-1}^{1}\int_{-1}^{1}\frac{1}{8}dx_2dx_3=\frac{1}{2}
+\]
+
+(d) Conditional PDF
+
+\[
+f_{X_1|X_2,X_3}=\frac{1/8}{1/4}=\frac{1}{2}
+\]
+
+(e) Conditional PDF
+
+\[
+f_{X_1,X_2|X_3}=\frac{1/8}{1/2}=\frac{1}{4}
+\]
+
+(f) Independence Check
+
+\[
+LHS=\frac{1}{8}
+\]
+
+\[
+RHS=\frac{1}{2}\cdot\frac{1}{2}\cdot\frac{1}{2}=\frac{1}{8}
+\]
+
+Conclusion
+
+LHS = RHS $\Rightarrow$ independent
+
+\section*{10. Example 3: Trivariate Random Variables}
+
+Given
+
+\[
+f_{XYZ}(x,y,z)=
+\begin{cases}
+Ke^{-(ax+by+cz)}, & x,y,z>0 \\
+0, & \text{otherwise}
+\end{cases}
+\]
+
+(a) Find $K$
+
+\[
+K\left(\frac{1}{a}\right)\left(\frac{1}{b}\right)\left(\frac{1}{c}\right)=1
+\]
+
+\[
+K=abc
+\]
+
+(b) Marginal Joint PDF
+
+\[
+f_{XY}(x,y)=\int_0^\infty abce^{-(ax+by+cz)}dz
+=abe^{-(ax+by)}
+\]
+
+(c) Marginal PDF
+
+\[
+f_X(x)=\int_0^\infty abe^{-(ax+by)}dy
+=ae^{-ax}
+\]
+
+(d) Independence Check
+
+LHS = $abce^{-(ax+by+cz)}$
+
+RHS = $(ae^{-ax})(be^{-by})(ce^{-cz})$
+
+Conclusion
+
+LHS = RHS $\Rightarrow X,Y,Z$ are independent
+
+\end{document}

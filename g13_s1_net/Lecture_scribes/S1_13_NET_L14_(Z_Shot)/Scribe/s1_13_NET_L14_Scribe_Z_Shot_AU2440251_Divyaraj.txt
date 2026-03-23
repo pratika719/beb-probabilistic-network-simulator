@@ -1,0 +1,381 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{amsmath, amssymb}
+
+\begin{document}
+
+\section*{CSE 400: Fundamentals of Probability in Computing}
+\subsection*{Tutorial 2 — Lecture Scribe (Authoritative Exam Reference)}
+
+\noindent
+\textbf{Name:}Divyaraj Vaghela
+\noindent
+\textbf{Enrollment number} AU2440251
+
+\section*{Q1. Random Point on a Line Segment}
+
+\subsection*{Problem Statement}
+A point is chosen at random on a line segment of length $L$. Find the probability that the ratio of the shorter to the longer segment is less than $\frac{1}{4}$.
+
+\subsection*{Mathematical Formulation}
+Let the point be at distance $x$, where:
+\[
+0 < x < L
+\]
+
+Segments formed:
+\[
+x \quad \text{and} \quad L - x
+\]
+
+Ratio:
+\[
+R = \frac{\min(x, L - x)}{\max(x, L - x)}
+\]
+
+\subsection*{Case Analysis}
+
+\textbf{Case 1:} $x \leq \frac{L}{2}$
+\[
+\frac{x}{L - x} < \frac{1}{4} \Rightarrow 4x < L - x \Rightarrow 5x < L \Rightarrow x < \frac{L}{5}
+\]
+
+\textbf{Case 2:} $x > \frac{L}{2}$
+\[
+\frac{L - x}{x} < \frac{1}{4} \Rightarrow 4L - 4x < x \Rightarrow 5x > 4L \Rightarrow x > \frac{4L}{5}
+\]
+
+\subsection*{Valid Region}
+\[
+(0, \tfrac{L}{5}) \cup (\tfrac{4L}{5}, L)
+\]
+
+\subsection*{Total length}
+\[
+\frac{L}{5} + \frac{L}{5} = \frac{2L}{5}
+\]
+
+\subsection*{Final Probability}
+\[
+P = \frac{2L/5}{L} = \frac{2}{5}
+\]
+
+\section*{Q2. Bayesian Classification with Normal Distributions}
+
+\subsection*{Given}
+\begin{itemize}
+\item $X|W \sim N(4,4) \Rightarrow \sigma_1 = 2$
+\item $X|B \sim N(6,9) \Rightarrow \sigma_2 = 3$
+\item $P(B) = \alpha, \quad P(W) = 1 - \alpha$
+\item Observation: $X = 5$
+\end{itemize}
+
+\subsection*{Condition for Equal Error}
+\[
+P(B|X = 5) = P(W|X = 5) = \frac{1}{2}
+\]
+
+\subsection*{Bayes’ Theorem}
+\[
+\frac{\alpha f(5|B)}{\alpha f(5|B) + (1 - \alpha) f(5|W)} = \frac{1}{2}
+\]
+
+\subsection*{Normal Densities}
+\[
+f(x) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{(x - \mu)^2}{2\sigma^2}}
+\]
+
+\[
+f(5|B) = \frac{1}{3\sqrt{2\pi}} e^{-1/18}, \quad
+f(5|W) = \frac{1}{2\sqrt{2\pi}} e^{-1/8}
+\]
+
+\subsection*{Substitution}
+\[
+\frac{\alpha e^{-1/18} / (3\sqrt{2\pi})}
+{\alpha e^{-1/18} / (3\sqrt{2\pi}) + (1 - \alpha) e^{-1/8} / (2\sqrt{2\pi})}
+= \frac{1}{2}
+\]
+
+\subsection*{Simplified Equation}
+\[
+\frac{3\alpha}{3\alpha + 2(1 - \alpha)e^{-5/72}} = \frac{1}{2}
+\]
+
+\subsection*{Solving}
+\[
+6\alpha = 3\alpha + 2(1 - \alpha)(0.93)
+\]
+
+\[
+3\alpha = 1.86 - 1.86\alpha
+\]
+
+\[
+4.86\alpha = 1.86 \Rightarrow \alpha \approx 0.3827
+\]
+
+\subsection*{Final Result}
+\[
+\alpha \approx 0.38
+\]
+
+\section*{Q3. Optimal Location Problem}
+
+\subsection*{(a) Uniform Distribution}
+
+\subsubsection*{Given}
+\[
+X \sim \text{Uniform}(0, A), \quad f_X(x) = \frac{1}{A}
+\]
+
+\subsubsection*{Objective}
+Minimize:
+\[
+E[|X - a|]
+\]
+
+\subsubsection*{Expression}
+\[
+E[|X - a|] = \int_0^a (a - x)\frac{1}{A}\,dx + \int_a^A (x - a)\frac{1}{A}\,dx
+\]
+
+\subsubsection*{Derivative}
+\[
+\frac{d}{da} \left( \frac{2a^2 - 2aA + A^2}{2A} \right) = \frac{1}{2A}(4a - 2A)
+\]
+
+\subsubsection*{Optimal Point}
+\[
+4a = 2A \Rightarrow a = \frac{A}{2}
+\]
+
+\subsubsection*{Result}
+Station at midpoint.
+
+\subsection*{(b) Exponential Distribution}
+
+\subsubsection*{Given}
+\[
+X \sim \text{Exponential}(\lambda), \quad f_X(x) = \lambda e^{-\lambda x}
+\]
+
+\subsubsection*{Derivative}
+\[
+\frac{d}{da} E[|X - a|] = 1 - 2e^{-\lambda a} = 0
+\]
+
+\subsubsection*{Solving}
+\[
+e^{-\lambda a} = \frac{1}{2} \Rightarrow -\lambda a = \ln(1/2) \Rightarrow a = \frac{\ln 2}{\lambda}
+\]
+
+\section*{Q4. Mixture of Exponential Lifetimes}
+
+\subsection*{Given}
+\begin{itemize}
+\item Type $i$: rate $\lambda_i$
+\item Probability $p_i$
+\end{itemize}
+
+\subsection*{Total Probability}
+\[
+P(X > t) = p_1 e^{-\lambda_1 t} + p_2 e^{-\lambda_2 t}
+\]
+
+\[
+P(X > t + s) = p_1 e^{-\lambda_1 (t+s)} + p_2 e^{-\lambda_2 (t+s)}
+\]
+
+\subsection*{Conditional Probability}
+\[
+P(X > t + s \mid X > t) =
+\frac{p_1 e^{-\lambda_1 (t+s)} + p_2 e^{-\lambda_2 (t+s)}}
+{p_1 e^{-\lambda_1 t} + p_2 e^{-\lambda_2 t}}
+\]
+
+\section*{Q5. Conditional Distribution of Poisson Variables}
+
+\subsection*{Given}
+\[
+X \sim \text{Poisson}(\lambda_1), \quad Y \sim \text{Poisson}(\lambda_2)
+\]
+
+\subsection*{Conditional Probability}
+\[
+P(X = k \mid X + Y = n) = \frac{P(X = k)P(Y = n - k)}{P(X + Y = n)}
+\]
+
+\subsection*{Substitution}
+\[
+= \frac{e^{-\lambda_1}\lambda_1^k / k! \cdot e^{-\lambda_2}\lambda_2^{n-k} / (n - k)!}
+{e^{-(\lambda_1+\lambda_2)}(\lambda_1 + \lambda_2)^n / n!}
+\]
+
+\subsection*{Final Form}
+\[
+P(X = k \mid X + Y = n) =
+\binom{n}{k}
+\left(\frac{\lambda_1}{\lambda_1 + \lambda_2}\right)^k
+\left(\frac{\lambda_2}{\lambda_1 + \lambda_2}\right)^{n-k}
+\]
+
+\section*{Q6. Transformation of Random Variables}
+
+\subsection*{Given}
+\[
+X \sim \text{Uniform}[-2,2], \quad f_X(x) = \frac{1}{4}
+\]
+
+\[
+g(x) =
+\begin{cases}
+x, & [-2,-1] \\
+0, & (-1,1) \\
+x, & [1,2]
+\end{cases}
+\]
+
+\subsection*{CDF $F_Y(y)$}
+\[
+F_Y(y) =
+\begin{cases}
+0, & y < -2 \\
+\frac{y+2}{4}, & -2 \leq y < -1 \\
+\frac{1}{4}, & -1 \leq y < 0 \\
+\frac{3}{4}, & 0 < y < 1 \\
+\frac{y+2}{4}, & 1 \leq y \leq 2 \\
+1, & y > 2
+\end{cases}
+\]
+
+Point mass:
+\[
+P(Y = 0) = \frac{1}{2}
+\]
+
+\subsection*{PDF $f_Y(y)$}
+\[
+f_Y(y) =
+\begin{cases}
+\frac{1}{4}, & -2 < y < -1 \\
+\frac{1}{4}, & 1 < y < 2 \\
+0, & \text{otherwise}
+\end{cases}
+\]
+
+with point mass $P(Y = 0) = \frac{1}{2}$
+
+\section*{Q7. Binomial Approximation of Stock Movement}
+
+\subsection*{Condition}
+\[
+S_{1000} = S_0 u^k d^{1000-k}
+\]
+
+\[
+u^k d^{1000-k} \geq 1.30
+\]
+
+\subsection*{Log Transformation}
+\[
+k(\ln u - \ln d) + 1000 \ln d \geq \ln(1.30)
+\]
+
+\subsection*{Solve for $k$}
+\[
+k \geq \frac{\ln(1.30) - 1000 \ln d}{\ln u - \ln d} \approx 469.4
+\]
+
+\[
+k \geq 470
+\]
+
+\subsection*{Distribution}
+\[
+k \sim \text{Binomial}(1000, 0.52)
+\]
+
+\subsection*{Final Probability}
+\[
+P(k \geq 470) = \sum_{k=470}^{1000} \binom{1000}{k} (0.52)^k (0.48)^{1000-k}
+\]
+
+\section*{Q8. Exponential Distribution}
+
+\subsection*{Given}
+\[
+\lambda = \frac{1}{2}, \quad f(x) = \frac{1}{2} e^{-x/2}
+\]
+
+\subsection*{(a)}
+\[
+P(X > 2) = e^{-1} \approx 0.3679
+\]
+
+\subsection*{(b)}
+\[
+P(X \geq 10 \mid X > 9) = \frac{e^{-5}}{e^{-9/2}} = e^{-1/2}
+\]
+
+\section*{Q9. Distribution of $Z = \sqrt{X^2 + Y^2}$}
+
+\subsection*{CDF}
+\[
+F_Z(z) = P(X^2 + Y^2 \leq z^2)
+\]
+
+\[
+= \int_{-z}^{z} \int_{-\sqrt{z^2 - x^2}}^{\sqrt{z^2 - x^2}} f_X(x) f_Y(y)\, dy\, dx
+\]
+
+\subsection*{PDF}
+\[
+f_Z(z) = \frac{d}{dz} F_Z(z)
+\]
+
+Using Leibniz rule:
+\[
+\frac{d}{dz} \sqrt{z^2 - x^2} = \frac{z}{\sqrt{z^2 - x^2}}
+\]
+
+\subsection*{Final Result}
+\[
+f_Z(z) = z \int_{-z}^{z} f_X(x)
+\frac{f_Y(\sqrt{z^2 - x^2}) + f_Y(-\sqrt{z^2 - x^2})}
+{\sqrt{z^2 - x^2}} \, dx, \quad z > 0
+\]
+
+\section*{Q10. Joint Distribution of $M_n$ and $M_{n+1}$}
+
+\subsection*{Definitions}
+\[
+M_n = \max(X_1, \ldots, X_n)
+\]
+
+\[
+P(M_n \leq x) = F(x)^n
+\]
+
+\subsection*{Joint CDF}
+
+\textbf{Case 1:} $x \leq y$
+\[
+P(M_n \leq x, M_{n+1} \leq y) = F(x)^n F(y)
+\]
+
+\textbf{Case 2:} $x > y$
+\[
+P(M_n \leq x, M_{n+1} \leq y) = F(y)^{n+1}
+\]
+
+\subsection*{Final Expression}
+\[
+P(M_n \leq x, M_{n+1} \leq y) =
+\begin{cases}
+F(x)^n F(y), & x \leq y \\
+F(y)^{n+1}, & x > y
+\end{cases}
+\]
+
+\end{document}

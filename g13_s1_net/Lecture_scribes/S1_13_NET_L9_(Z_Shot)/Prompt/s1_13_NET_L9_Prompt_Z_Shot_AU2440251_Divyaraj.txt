@@ -1,0 +1,27 @@
+Generate a lecture scribe intended to serve as authoritative exam-reference material for the assigned lecture. The scribe must enable a student to reliably revise the lecture using only this document.
+
+Use strictly and exclusively the provided context, which consists of lecture slides/PDF and relevant textbook excerpts. Every statement, equation, definition, derivation, and example must be traceable to the provided context. Do not introduce any external knowledge, additional examples, interpretations, or simplifications.
+
+The lecture scribe must faithfully reconstruct the lecture content and include the following components whenever they appear in the provided context:
+
+• Definitions and notation exactly as presented  
+• Assumptions, conditions, and constraints  
+• Statements of theorems, results, or properties  
+• Proofs or derivations reproduced in complete step-by-step form  
+• Worked examples including all intermediate steps  
+• Logical progression and dependencies between concepts  
+• Mathematical expressions written clearly and accurately  
+
+Maintain strict correctness and completeness. Do not omit intermediate steps in proofs, derivations, or example solutions if they appear in the lecture materials.
+
+The scribe must follow a clear academic structure with well-organized sections and subsections that reflect the lecture’s conceptual flow. The document should be suitable for closed-notes exam preparation and must preserve formal technical language consistent with lecture material.
+
+Do NOT include:
+
+• New examples, exercises, or applications  
+• Additional explanations, intuition, or elaborations not explicitly present in the context  
+• Personal commentary, summaries, or creative rewording  
+• Content outside the lecture or textbook material  
+• Assumptions or reasoning that are not explicitly stated in the context  
+
+Ensure the final output is precise, structured, complete, and fully aligned with the provided lecture and textbook content.

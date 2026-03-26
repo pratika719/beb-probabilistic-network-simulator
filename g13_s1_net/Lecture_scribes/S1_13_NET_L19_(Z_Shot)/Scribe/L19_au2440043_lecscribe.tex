@@ -1,0 +1,167 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb}
+
+\title{Lecture 19: N-Variate Joint PDF/PMF/CDF}
+\author{CSE400 – Fundamentals of Probability in Computing}
+\date{March 17, 2026}
+
+\begin{document}
+
+\maketitle
+
+\section*{1. Joint Distribution of N Random Variables}
+
+The joint distribution describes the probability behavior of multiple random variables considered together.
+
+\subsection*{Vector Representation}
+For random variables $X_1, X_2, \dots, X_N$, the joint behavior is expressed as:
+\[
+\mathbf{X} =
+\begin{bmatrix}
+X_1 \\
+X_2 \\
+\vdots \\
+X_N
+\end{bmatrix}
+\]
+
+\subsection*{Representation Methods}
+Joint distributions can be represented using:
+\begin{itemize}
+    \item Joint Probability Mass Function (PMF)
+    \item Joint Probability Density Function (PDF)
+    \item Joint Cumulative Distribution Function (CDF)
+\end{itemize}
+
+\section*{2. Jointly Gaussian Random Variables}
+
+The joint behavior of variables influenced by many random environmental processes can often be approximated by a Joint Gaussian Distribution.
+
+\subsection*{2.1 Bivariate Gaussian PDF}
+
+For two random variables $X$ and $Y$, the joint PDF is:
+\[
+f_{X,Y}(x,y) =
+\frac{1}{2\pi\sigma_X\sigma_Y\sqrt{1-\rho^2}}
+\exp\left(
+-\frac{1}{2(1-\rho^2)}
+\left[
+\left(\frac{x-\mu_X}{\sigma_X}\right)^2 +
+\left(\frac{y-\mu_Y}{\sigma_Y}\right)^2 -
+2\rho\left(\frac{x-\mu_X}{\sigma_X}\right)
+\left(\frac{y-\mu_Y}{\sigma_Y}\right)
+\right]
+\right)
+\]
+
+\subsection*{Parameters}
+\begin{itemize}
+    \item $\mu_X, \mu_Y$: Means of $X$ and $Y$
+    \item $\sigma_X, \sigma_Y$: Standard deviations
+    \item $\rho$: Pearson correlation coefficient
+\end{itemize}
+
+\subsection*{2.2 Key Properties}
+
+\textbf{Marginal Distributions:}
+\[
+X \sim \mathcal{N}(\mu_X, \sigma_X^2), \quad
+Y \sim \mathcal{N}(\mu_Y, \sigma_Y^2)
+\]
+
+\textbf{Marginal PDF Calculation:}
+\[
+f_X(x) = \int_{-\infty}^{\infty} f_{XY}(x,y)\,dy
+\]
+\[
+f_Y(y) = \int_{-\infty}^{\infty} f_{XY}(x,y)\,dx
+\]
+
+\section*{3. Worked Example: Jointly Gaussian RVs}
+
+\textbf{Given:}
+\[
+\mu_X = 2,\ \sigma_X^2 = 1,\ \mu_Y = -3,\ \sigma_Y^2 = 4,\ \text{cov}(X,Y) = -1
+\]
+
+\subsection*{(a) Joint PDF}
+
+\textbf{Standard Deviations:}
+\[
+\sigma_X = 1,\quad \sigma_Y = 2
+\]
+
+\textbf{Correlation Coefficient:}
+\[
+\rho_{XY} = \frac{\text{cov}(X,Y)}{\sigma_X \sigma_Y} = \frac{-1}{2} = -0.5
+\]
+
+\textbf{Final Joint PDF:}
+\[
+f_{XY}(x,y) =
+\frac{1}{2\pi\sqrt{3}}
+\exp\left\{
+-\frac{2}{3}
+\left[
+(x-2)^2 +
+\frac{(x-2)(y+3)}{2} +
+\frac{(y+3)^2}{4}
+\right]
+\right\}
+\]
+
+\subsection*{(b) Marginal PDFs}
+
+\[
+f_X(x) =
+\frac{1}{\sqrt{2\pi}}
+\exp\left(
+-\frac{(x-2)^2}{2}
+\right)
+\]
+
+\[
+f_Y(y) =
+\frac{1}{2\sqrt{2\pi}}
+\exp\left(
+-\frac{(y+3)^2}{8}
+\right)
+\]
+
+\subsection*{(c) Probability $\text{Pr}(X < 0)$}
+
+\[
+\text{Pr}(X < 0) = F_X(0)
+\]
+
+\[
+\text{Pr}(X < 0) =
+\text{Pr}\left(
+\frac{X - 2}{1} < \frac{0 - 2}{1}
+\right)
+=
+\text{Pr}(Z < -2)
+= \Phi(-2)
+\]
+
+Using symmetry and Q-function:
+\[
+\Phi(-x) = 1 - \Phi(x) = \text{Pr}(Z > x)
+\]
+
+\[
+Q(x) = \text{Pr}(Z > x)
+\]
+
+\[
+\text{Pr}(X < 0) = Q(2)
+\]
+
+\section*{4. Applications and Context}
+
+\begin{itemize}
+    \item Climate Systems: Relationship between atmospheric $CO_2$ and global temperature
+    \item Wireless Communication: Large MIMO Systems with $M$ transmit and $N$ receive antennas
+\end{itemize}
+
+\end{document}

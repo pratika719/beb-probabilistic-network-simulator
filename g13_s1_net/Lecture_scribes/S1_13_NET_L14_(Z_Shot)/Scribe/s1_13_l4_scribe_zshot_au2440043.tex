@@ -1,0 +1,168 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{Probability and Statistics: Problems and Solutions}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+% --- Problem 1 ---
+\section*{Q1. Uniform Distribution on a Line Segment}
+\textbf{Problem:} A point is chosen at random on a line segment of length $L$. Find the probability that the ratio of the shorter to the longer segment is less than $1/4$.
+
+\textbf{Solution:} 
+Let the point be chosen at a distance $x$ from one end, where $0 < x < L$. This forms two segments of lengths $x$ and $L-x$. The ratio $R$ is defined as:
+\[ R = \frac{\min(x, L-x)}{\max(x, L-x)} \]
+
+We analyze two cases based on the midpoint:
+\begin{itemize}
+    \item \textbf{Case 1 ($x \le L/2$):} The shorter segment is $x$ and the longer is $L-x$.
+    \[ \frac{x}{L-x} < \frac{1}{4} \Rightarrow 4x < L-x \Rightarrow 5x < L \Rightarrow x < \frac{L}{5} \]
+    \item \textbf{Case 2 ($x > L/2$):} The shorter segment is $L-x$ and the longer is $x$.
+    \[ \frac{L-x}{x} < \frac{1}{4} \Rightarrow 4L - 4x < x \Rightarrow 5x > 4L \Rightarrow x > \frac{4L}{5} \]
+\end{itemize}
+
+\textbf{Result:} The valid region for $x$ is $(0, L/5) \cup (4L/5, L)$. The total length of this region is $2L/5$.
+\[ P = \frac{\text{valid region}}{\text{total region}} = \frac{2L/5}{L} = \frac{2}{5} \]
+
+---
+
+% --- Problem 2 ---
+\section*{Q2. Error Probability in Image Region Classification}
+\textbf{Problem:} An image has white ($W$) and black ($B$) regions. Readings from $W$ follow $N(4, 4)$; readings from $B$ follow $N(6, 9)$. Given a reading of $5$ and a black fraction $\alpha$, find $\alpha$ such that the probability of error is the same regardless of the conclusion.
+
+\textbf{Solution:}
+$X|W \sim N(4, 4) \Rightarrow \sigma_1 = 2$ \\
+$X|B \sim N(6, 9) \Rightarrow \sigma_2 = 3$ \\
+$P(B) = \alpha$, $P(W) = 1 - \alpha$. 
+
+For equal error probability at $X=5$, posterior probabilities must be equal:
+\[ P(B|X=5) = P(W|X=5) = \frac{1}{2} \]
+
+Using Bayes' Theorem and the normal density formula $f(x) = \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$:
+\[ f(5|B) = \frac{1}{3\sqrt{2\pi}}e^{-1/18}, \quad f(5|W) = \frac{1}{2\sqrt{2\pi}}e^{-1/8} \]
+
+Substituting into the equilibrium equation:
+\[ \frac{\alpha \cdot f(5|B)}{\alpha \cdot f(5|B) + (1-\alpha) \cdot f(5|W)} = \frac{1}{2} \]
+\[ \frac{\frac{\alpha}{3} e^{-1/18}}{\frac{\alpha}{3} e^{-1/18} + \frac{1-\alpha}{2} e^{-1/8}} = \frac{1}{2} \Rightarrow \frac{2\alpha}{3} e^{-1/18} = \frac{1-\alpha}{2} e^{-1/8} \]
+\[ 4\alpha e^{-1/18} = 3(1-\alpha)e^{-1/8} \Rightarrow \frac{4\alpha}{3(1-\alpha)} = e^{-1/8 + 1/18} = e^{-5/72} \approx 0.9324 \]
+\[ 4\alpha = 2.797(1-\alpha) \Rightarrow 6.797\alpha = 2.797 \]
+\textbf{Result:} $\alpha \approx 0.38$
+
+---
+
+% --- Problem 3 ---
+\section*{Q3. Minimizing Expected Distance for Facility Location}
+\textbf{Problem:} Locate a fire station at $a$ to minimize $E[|X-a|]$.
+
+\textbf{(a) Uniform Distribution on $(0, A)$:}
+\[ E[|X-a|] = \int_{0}^{a}(a-x)\frac{1}{A}dx + \int_{a}^{A}(x-a)\frac{1}{A}dx \]
+Differentiating with respect to $a$ and setting to zero: 
+\[ \frac{d}{da} E[|X-a|] = \frac{1}{A} \left( \int_0^a 1 dx - \int_a^A 1 dx \right) = \frac{1}{A}(a - (A - a)) = \frac{2a - A}{A} = 0 \]
+\textbf{Result:} $a = A/2$ (Midpoint).
+
+\textbf{(b) Exponential Distribution on $(0, \infty)$ with rate $\lambda$:}
+\[ E[|X-a|] = \int_{0}^{a}(a-x)\lambda e^{-\lambda x}dx + \int_{a}^{\infty}(x-a)\lambda e^{-\lambda x}dx \]
+Differentiating: $F_X(a) - (1 - F_X(a)) = 0 \Rightarrow 2(1 - e^{-\lambda a}) - 1 = 0 \Rightarrow 1 - 2e^{-\lambda a} = 0$.
+\[ e^{-\lambda a} = 1/2 \]
+\textbf{Result:} $a = \frac{\ln 2}{\lambda}$ (The median).
+
+---
+
+% --- Problem 4 ---
+\section*{Q4. Conditional Lifetime of Mixed Battery Types}
+\textbf{Problem:} A bin contains two battery types with exponential rates $\lambda_1, \lambda_2$ and probabilities $p_1, p_2$. Find $P(X > t+s | X > t)$.
+
+\textbf{Solution:} Using the Law of Total Probability:
+\[ P(X > t) = p_1 e^{-\lambda_1 t} + p_2 e^{-\lambda_2 t} \]
+\[ P(X > t+s) = p_1 e^{-\lambda_1(t+s)} + p_2 e^{-\lambda_2(t+s)} \]
+\textbf{Result:} \[ P(X > t+s | X > t) = \frac{p_1 e^{-\lambda_1(t+s)} + p_2 e^{-\lambda_2(t+s)}}{p_1 e^{-\lambda_1 t} + p_2 e^{-\lambda_2 t}} \]
+
+---
+
+% --- Problem 5 ---
+\section*{Q5. Conditional Poisson Requests}
+\textbf{Problem:} $X \sim \text{Poisson}(\lambda_1)$ and $Y \sim \text{Poisson}(\lambda_2)$ are independent. Find $P(X=k | X+Y=n)$.
+
+\textbf{Solution:}
+\[ P(X=k | X+Y=n) = \frac{P(X=k)P(Y=n-k)}{P(X+Y=n)} \]
+Substituting PMFs:
+\[ \frac{\left(\frac{e^{-\lambda_1}\lambda_1^k}{k!}\right)\left(\frac{e^{-\lambda_2}\lambda_2^{n-k}}{(n-k)!}\right)}{\frac{e^{-(\lambda_1+\lambda_2)}(\lambda_1+\lambda_2)^n}{n!}} = \frac{n!}{k!(n-k)!} \frac{\lambda_1^k \lambda_2^{n-k}}{(\lambda_1+\lambda_2)^n} \]
+\textbf{Result:} $\binom{n}{k} \left(\frac{\lambda_1}{\lambda_1+\lambda_2}\right)^k \left(\frac{\lambda_2}{\lambda_1+\lambda_2}\right)^{n-k}$ (Binomial distribution).
+
+---
+
+% --- Problem 6 ---
+\section*{Q6. Transformation of Uniform Random Variables}
+\textbf{Problem:} $X \sim \text{Uniform}[-2, 2]$ and $Y = g(X)$, where $g(x)=x$ for $|x| \ge 1$ and $g(x)=0$ for $|x| < 1$.
+
+\textbf{Solution (CDF $F_Y(y)$):}
+\begin{itemize}
+    \item $y < -2$: $F_Y(y) = 0$
+    \item $-2 \le y < -1$: $F_Y(y) = P(X \le y) = \frac{y - (-2)}{2 - (-2)} = \frac{y+2}{4}$
+    \item $-1 \le y < 0$: $F_Y(y) = P(X \le -1) = 1/4$
+    \item $y = 0$: Point mass $P(Y=0) = P(-1 < X < 1) = 2/4 = 1/2$. Thus $F_Y(0) = 1/4 + 1/2 = 3/4$.
+    \item $0 < y < 1$: $F_Y(y) = 3/4$
+    \item $1 \le y \le 2$: $F_Y(y) = P(X \le -1) + P(-1 < X < 1) + P(1 \le X \le y) = \frac{1}{4} + \frac{1}{2} + \frac{y-1}{4} = \frac{y+2}{4}$
+\end{itemize}
+
+\textbf{Solution (PDF $f_Y(y)$):} $f_Y(y) = 1/4$ for $y \in (-2, -1) \cup (1, 2)$, with a discrete point mass $P(Y=0) = 1/2$.
+
+---
+
+% --- Problem 7 ---
+\section*{Q7. Stock Price Probability (Binomial Approximation)}
+\textbf{Problem:} Initial price $S_0$. Up-move $u=1.012$ ($p=0.52$), down-move $d=0.990$ ($1-p=0.48$). Find probability price is up $\ge 30\%$ after 1000 periods.
+
+\textbf{Solution:}
+$S_{1000} = S_0 u^k d^{1000-k} \ge 1.30 S_0$ where $k$ is the number of up-moves.
+\[ k \ln u + (1000-k) \ln d \ge \ln(1.30) \]
+\[ k(\ln u - \ln d) \ge \ln(1.30) - 1000 \ln d \]
+\[ k \ge \frac{\ln(1.30) - 1000 \ln(0.990)}{\ln(1.012) - \ln(0.990)} \approx \frac{0.26236 - (-10.0503)}{0.011928 + 0.01005} \approx 469.4 \Rightarrow k \ge 470 \]
+\textbf{Result:} $P(k \ge 470) = \sum_{k=470}^{1000} \binom{1000}{k} (0.52)^k (0.48)^{1000-k}$
+
+---
+
+% --- Problem 8 ---
+\section*{Q8. Exponential Repair Times}
+\textbf{Problem:} Repair time $X \sim \text{Exp}(\lambda=1/2)$.
+
+\textbf{(a)} $P(X > 2)$: $\int_{2}^{\infty} \frac{1}{2}e^{-x/2}dx = \left[ -e^{-x/2} \right]_2^\infty = e^{-1} \approx 0.3679$
+
+\textbf{(b)} $P(X \ge 10 | X > 9)$: Due to memoryless property, $P(X \ge 10 | X > 9) = P(X \ge 1)$.
+\[ P(X \ge 1) = e^{-1/2} \approx 0.6065 \]
+
+---
+
+% --- Problem 9 ---
+\section*{Q9. Distribution of $Z = \sqrt{X^2 + Y^2}$}
+\textbf{Problem:} $X, Y$ are independent. Find PDF of $Z$.
+
+\textbf{Solution:}
+$F_Z(z) = P(\sqrt{X^2 + Y^2} \le z) = P(X^2 + Y^2 \le z^2)$
+\[ F_Z(z) = \int_{-z}^{z} \int_{-\sqrt{z^2-x^2}}^{\sqrt{z^2-x^2}} f_X(x) f_Y(y) dy dx \]
+Differentiating using Leibniz's rule and symmetry:
+\textbf{Result:} $f_Z(z) = z \int_{-z}^{z} \frac{f_X(x) [f_Y(\sqrt{z^2-x^2}) + f_Y(-\sqrt{z^2-x^2})]}{\sqrt{z^2-x^2}} dx$, for $z > 0$.
+
+---
+
+% --- Problem 10 ---
+\section*{Q10. Joint Distribution of Successive Maxima}
+\textbf{Problem:} $M_n = \max(X_1, \dots, X_n)$ where $X_i$ are i.i.d. with CDF $F$. Find joint CDF of $M_n, M_{n+1}$.
+
+\textbf{Solution:}
+\textbf{Case 1 ($x \le y$):} $M_n \le x$ and $M_{n+1} \le y$ implies $\{X_1, \dots, X_n\} \le x$ and $X_{n+1} \le y$.
+\[ P(M_n \le x, M_{n+1} \le y) = F(x)^n F(y) \]
+\textbf{Case 2 ($x > y$):} $M_{n+1} \le y$ automatically implies $M_n \le y$. Since $y < x$, the condition $M_n \le x$ is redundant.
+\[ P(M_n \le x, M_{n+1} \le y) = P(M_{n+1} \le y) = F(y)^{n+1} \]
+
+\textbf{Result:} 
+\[ P(M_n \le x, M_{n+1} \le y) = \begin{cases} F(x)^n F(y), & x \le y \\ F(y)^{n+1}, & x > y \end{cases} \]
+
+\end{document}
